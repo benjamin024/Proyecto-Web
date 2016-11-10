@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="utilities/images/logoescom-182x128-95.png" type="image/x-icon">
+  <link rel="stylesheet" href="utilities/bootstrap/css/bootstrap.min.css"> <!-- Ayuda al diseño responsivo -->
+  <link rel="stylesheet" href="utilities/dropdown/css/style.css"> <!-- Aplica animaciones y estilos al hacer scroll -->
+  <link rel="stylesheet" href="utilities/theme/css/style.css"><!-- Estilo del tema -->
+  <link rel="stylesheet" href="utilities/mobirise/css/mbr-additional.css" type="text/css"> <!-- estilo del nav -->
+  <title>Ley de Ohm | Escuela Superior de Cómputo</title>  
+</head>
+<body>
+<section id="menu-0">
+    <nav class="navbar navbar-dropdown navbar-fixed-top">
+        <div class="container">
+            <div class="mbr-table">
+                <div class="mbr-table-cell">
+                    <div class="navbar-brand">
+                        <a href="index.html" class="navbar-logo"><img src="utilities/images/logoescom-182x128-95.png"></a>
+                        <a class="navbar-caption text-white" href="index.html">Escuela Superior de Cómputo</a>
+                    </div>
+                </div>
+                <div class="mbr-table-cell">
+                    <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                        <div class="hamburger-icon"></div>
+                    </button>
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm" id="exCollapsingNavbar">
+	                    <li class="nav-item"><a class="nav-link link" href="formRegistra.html" aria-expanded="false"  style="color: #FFFFFF;">Registrate</a></li>
+	                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white-outline btn-white" href="formLogin.html">Inicia Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</section>
+
+<section class="mbr-section mbr-section-hero mbr-section-full mbr-parallax-background" id="header1-1" style="background-image: url(utilities/images/fondo.png);">
+    <div class="mbr-table-cell">
+        <div class="container">
+            <div class="row">
+                <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
+                    <h1 class="mbr-section-title display-1">¡Regístrate!</h1>
+                    <p class="text-black">Introduce tu información para registrarte en el sistema:</p>
+                    <form action="registraAlumno" method="post" class="form">
+                        <div class="col-md-8">
+                            <label for="nombre" class="text-black">Nombre Completo:</label>
+                            <input type="text" class="form-control" placeholder="Nombre Completo" id="nombre" name="nombre" required/>
+                        </div>
+                        <div class="col-md-offset-8">
+                            <label for="grupo" class="text-black">Grupo:</label>
+                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="user" class="text-black">Número de Boleta:</label>
+                            <input type="text" class="form-control" placeholder="Número de Boleta" id="user" name="user" required/>
+                        </div>
+                        <div class="col-md-offset-6">
+                            <label for="mail" class="text-black">Correo Electrónico:</label>
+                            <input class="form-control" type="mail" name="mail" id="mail" placeholder="Correo Electrónico" required/>
+                        </div>
+                        <div class="input-group-sm">
+                            <br><input type="submit" value="Aceptar" class="btn btn-black btn-lg btn-black-outline"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="mbr-small-footer mbr-section mbr-section-nopadding" id="footer1-2" style="background-color: rgb(40, 40, 40); padding-top: 1%; padding-bottom: 1%;">   
+    <div class="container">
+        <p class="text-xs-center" style="color: #FFFFFF;">Escuela superior de Cómputo<br>Tecnologías para la Web</p>
+    </div>
+</footer>
+  <script src="utilities/jquery/jquery-3.1.1.js"></script>
+  <script src="utilities/bootstrap/js/bootstrap.min.js"></script>
+  <script src="utilities/dropdown/js/script.min.js"></script>
+  </body>
+</html>

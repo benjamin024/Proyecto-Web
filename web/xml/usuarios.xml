@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="iso-8859-1"?> 
+<usuarios>
+	<usuario id="Alumno01" activo="1" tipo="3">
+		<nombre>Benjamín Dorantes García</nombre>
+		<grupo>2CM11</grupo>
+		<email>benjamin.dorantes@hotmail.com</email>
+		<password>123</password>
+	</usuario>
+	<usuario id="Alumno02" activo="0" tipo="3">
+		<nombre>Fernando Acoltzi Santillan</nombre>
+		<grupo>2CM11</grupo>
+		<email>benjamin.dorantes@hotmail.com</email>
+		<password>123</password>
+	</usuario>
+	<usuario id="Profesor01"  tipo="2">
+		<nombre>Dr. Profesor Patricio</nombre>
+		<grupo>2CM11</grupo>
+		<grupo>2CM8</grupo>
+		<email>benjamin.dorantes@hotmail.com</email>
+		<password>123</password>
+	</usuario>
+	<usuario id="Admin01" tipo="1">
+		<nombre>Rubén PereDios</nombre>
+		<email>benjamin.dorantes@hotmail.com</email>
+		<password>123</password>
+	</usuario>
+</usuarios>
