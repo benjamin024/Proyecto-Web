@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -19,6 +20,8 @@ public class login extends HttpServlet {
     private int tipoUsuario = -1;
     private int activo = -1;
     private String rutaXML;
+    private String nombre;
+    private String grupo;
     
     private boolean usuarioEncontrado(String usr, String pass) throws Exception{
         SAXBuilder builder = new SAXBuilder(); 
@@ -34,6 +37,9 @@ public class login extends HttpServlet {
                 tipoUsuario = Integer.parseInt(hijo.getAttributeValue("tipo"));
                 if(tipoUsuario == 3)
                     activo  = Integer.parseInt(hijo.getAttributeValue("activo"));
+                nombre = hijo.getChildText("nombre");
+                if(tipoUsuario != 1)
+                    grupo = hijo.getChildText("grupo");
                 return true;
             }
         } 
@@ -56,7 +62,11 @@ public class login extends HttpServlet {
                             out.println("Bienvenido " + usuario);
                             break;
                         case 2:
-                            out.println("Bienvenido " + usuario);
+                            HttpSession sesion = request.getSession();
+                            sesion.setAttribute("nombre", nombre);
+                            sesion.setAttribute("user", usuario);
+                            sesion.setAttribute("grupo", grupo);
+                            response.sendRedirect("profesor");
                             break;
                         case 3:
                             if(activo == 1){
@@ -66,7 +76,7 @@ public class login extends HttpServlet {
                             }
                     }
                 }else{
-                    out.println("Usuario o contraseña incorrectos");
+                    out.println("<script>alert('Usuario o password incorrectos');</script>");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);

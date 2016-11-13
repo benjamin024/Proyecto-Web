@@ -33,7 +33,7 @@ public class registraAlumno extends HttpServlet {
         Element usuario = new Element("usuario");
         Element nombre = new Element("nombre");
         Element grupo = new Element ("grupo");
-        Element mail = new Element("mail");
+        Element mail = new Element("email");
         Element pass = new Element("password");
         nombre.setText(nom);
         grupo.setText(grup);
@@ -66,9 +66,10 @@ public class registraAlumno extends HttpServlet {
             try {
                 boolean ok = registroAlumno(nombre, grupo, user, mail);
                 if(ok){
-                    out.println("Usuario registrado");
+                    out.println("<script>alert('Se ha registrado tu petición para inscribirte en el grupo.\nCuando el profesor acepte tu solicitud se enviara un correo con tus datos de acceso.');</script>");
+                    response.sendRedirect("index.html");
                 }else{
-                    out.println("ERROR");
+                    out.println("<script>alert('Has cerrado sesión exitosamente');</script>");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(registraAlumno.class.getName()).log(Level.SEVERE, null, ex);

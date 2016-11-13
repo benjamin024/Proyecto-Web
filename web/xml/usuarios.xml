@@ -1,27 +1,34 @@
-﻿<?xml version="1.0" encoding="iso-8859-1"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 <usuarios>
-	<usuario id="Alumno01" activo="1" tipo="3">
-		<nombre>Benjamín Dorantes García</nombre>
-		<grupo>2CM11</grupo>
-		<email>benjamin.dorantes@hotmail.com</email>
-		<password>123</password>
-	</usuario>
-	<usuario id="Alumno02" activo="0" tipo="3">
-		<nombre>Fernando Acoltzi Santillan</nombre>
-		<grupo>2CM11</grupo>
-		<email>benjamin.dorantes@hotmail.com</email>
-		<password>123</password>
-	</usuario>
-	<usuario id="Profesor01"  tipo="2">
-		<nombre>Dr. Profesor Patricio</nombre>
-		<grupo>2CM11</grupo>
-		<grupo>2CM8</grupo>
-		<email>benjamin.dorantes@hotmail.com</email>
-		<password>123</password>
-	</usuario>
-	<usuario id="Admin01" tipo="1">
-		<nombre>Rubén PereDios</nombre>
-		<email>benjamin.dorantes@hotmail.com</email>
-		<password>123</password>
-	</usuario>
+  <usuario id="Alumno01" activo="1" tipo="3">
+    <nombre>Benjamin Dorantes Garcia</nombre>
+    <grupo>2CM11</grupo>
+    <email>benjamin.dorantes@hotmail.com</email>
+    <password>123</password>
+  </usuario>
+  <usuario id="Alumno02" activo="1" tipo="3">
+    <nombre>Fernando Acoltzi Santillan</nombre>
+    <grupo>2CM11</grupo>
+    <email>benjamin.dorantes@hotmail.com</email>
+    <password>123</password>
+  </usuario>
+  <usuario id="Profesor01" tipo="2">
+    <nombre>Dr. Profesor Patricio</nombre>
+    <grupo>2CM11</grupo>
+    <grupo>2CM8</grupo>
+    <email>benjamin.dorantes@hotmail.com</email>
+    <password>123</password>
+  </usuario>
+  <usuario id="Admin01" tipo="1">
+    <nombre>Ruben PereDios</nombre>
+    <email>benjamin.dorantes@hotmail.com</email>
+    <password>123</password>
+  </usuario>
+  <usuario id="2015630118" activo="0" tipo="3">
+    <nombre>Isa Herrera Becerra</nombre>
+    <grupo>2CM11</grupo>
+    <mail>ma_isahb@hotmail.com</mail>
+    <password>IHerreraB11</password>
+  </usuario>
 </usuarios>
+
