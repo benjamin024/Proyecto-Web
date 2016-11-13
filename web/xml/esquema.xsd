@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="usuarios">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="usuario">
+					<xs:complexType>
+						<xs:sequence>
+							
+							<xs:element name="nombre" type="xs:string"/>
+							<xs:element name="grupo" type="xs:string"/>
+							<xs:element name="email" type="xs:string"/>
+							<xs:element name="password" type="xs:string"/>
+						
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:string"/>
+						<xs:attribute name="activo" type="xs:int"/>
+						<xs:attribute name="tipo" type="xs:int"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

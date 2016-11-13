@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<usuarios>
+
+<usuarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="esquema.xsd">
   <usuario id="Alumno01" activo="1" tipo="3">
     <nombre>Benjamin Dorantes Garcia</nombre>
     <grupo>2CM11</grupo>
