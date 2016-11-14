@@ -75,7 +75,33 @@ public class modificarDatos extends HttpServlet {
             out.println("<div class='row'>");
             out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
             //
-            
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
+    out.println("<div class='mbr-table-cell'>");
+       out.println(" <div class='container'>");
+         out.println("   <div class='row'>");
+                <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
+                    <h1 class="mbr-section-title display-1">¡Regístrate!</h1>
+                    <p class="text-black">Introduce tu información para registrarte en el sistema:</p>
+                    <form action="registraAlumno" method="post" class="form">
+                        <div class="col-md-8">
+                            <label for="nombre" class="text-black">Nombre Completo:</label>
+                            <input type="text" class="form-control" placeholder="Nombre Completo" id="nombre" name="nombre" required/>
+                        </div>
+                        <div class="col-md-offset-8">
+                            <label for="grupo" class="text-black">Grupo:</label>
+                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="user" class="text-black">Número de Boleta:</label>
+                            <input type="text" class="form-control" placeholder="Número de Boleta" id="user" name="user" required/>
+                        </div>
+                        <div class="col-md-offset-6">
+                            <label for="mail" class="text-black">Correo Electrónico:</label>
+                            <input class="form-control" type="mail" name="mail" id="mail" placeholder="Correo Electrónico" required/>
+                        </div>
+                        <div class="input-group-sm">
+                            <br><input type="submit" value="Aceptar" class="btn btn-black btn-lg btn-black-outline"/>
+                       out.println(" </div></form></div></div></div></div></section>");
             
             //
              out.println("</div>");
