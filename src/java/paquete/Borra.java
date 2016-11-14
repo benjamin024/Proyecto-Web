@@ -88,8 +88,9 @@ public class Borra extends HttpServlet {
                  if (tipoUsuario==1) 
                  {
                  out.println(
+                         //MUEVELE AQUI MATS
                         "<script type=\"text/javascript\">\n" +
-"var xmlDoc=null;\n" +
+                                "var xmlDoc=null;\n" +
 "if (window.ActiveXObject)\n" +
 "{// code for IE\n" +
 "xmlDoc=new ActiveXObject(\"Microsoft.XMLDOM\");\n" +
@@ -106,11 +107,16 @@ public class Borra extends HttpServlet {
 "{\n" +
 "xmlDoc.async=false;\n" +
 "xmlDoc.load(\"xml/usuarios.xml\");\n" +
-"var x=xmlDoc.getElementsByTagName(\"usuarios\");\n" +
-
-"document.write(\"<table border='1' >\");\n" +
+"var x = xmlDoc.getElementsByTagName(\"usuarios\");\n" +//PROBLEMA QUE NO SE QUE PEDO
+"\n" +
+"    var boton = document.createElement(\"button\");\n" +
+"    \n" +
+"    \n" +
+"   \n" +
+"\n" +
+"document.write(\"<table border='1'>\");\n" +
 "document.write(\"<thead>\");\n" +
-"document.write(\"<thead><tr><th>Tipo de Usuario</th><th>Nombre Completo</th><th>Correo Electrónico</th></tr></thead>\");\n" +
+"document.write(\"<thead><tr><th WIDTH=200 HEIGHT=30>Tipo de Usuario</th><th WIDTH=200>ID Usuario</th><th WIDTH=300>Nombre Completo</th><th WIDTH=300>Correo Electrónico</th></tr></thead>\");\n" +
 "document.write(\"</thead>\");\n" +
 "\n" +
 "document.write(\"<tfoot>\");\n" +
@@ -119,9 +125,13 @@ public class Borra extends HttpServlet {
 "\n" +
 "for (var i=0;i<x.length;i++)\n" +
 "{\n" +
-"document.write(\"<tr>\");\n" +
+"document.write(\"<tr HEIGHT=50>\");\n" +
 "document.write(\"<td>\");\n" +
 "document.write(x[i].getElementsByTagName(\"usuario\")[0].getAttribute(\"tipo\"));\n" +
+"document.write(\"</td>\");\n" +
+"\n" +
+"document.write(\"<td>\");\n" +
+"document.write(x[i].getElementsByTagName(\"usuario\")[0].getAttribute(\"id\"));\n" +
 "document.write(\"</td>\");\n" +
 "\n" +
 "\n" +
@@ -136,7 +146,8 @@ public class Borra extends HttpServlet {
 "document.write(\"</td>\");\n" +
 "}\n" +
 "document.write(\"</table>\");\n" +
-"}\n" +
+"}"+
+
 "</script>"
                          
                                  
@@ -150,8 +161,10 @@ public class Borra extends HttpServlet {
                   out.println(        
 "                </div>\n" +
 "            </div>\n" +
-        " Introduzca correo de Usuario: <input type='text' size='40' name'idborra' id='idborra'/>"+
-"    <input type='button' value='Borrar' onclick=\"borrar(idborra)\"/>"+
+"   <form action='ServBorra' method='post'>"+
+" Introduzca ID de Usuario: <input type='text' size='40' name'idborra' id='idborra' placeholder=\"ID usuario\"/>"+
+"    <input type=\"submit\" value='Borrar' class=\"btn btn-danger\"/>"+
+        "</form>"+
 "        </div>\n" +
 "</div>\n" +
 "</section>\n" +

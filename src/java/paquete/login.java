@@ -59,7 +59,9 @@ public class login extends HttpServlet {
                 if(ok){ //usuario y contraseña correctas
                     switch(tipoUsuario){
                         case 1:
+                             
                             out.println("Bienvenido " + usuario);
+                            response.sendRedirect("Borra");
                             break;
                         case 2:
                             HttpSession sesion = request.getSession();
