@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="utilities/dropdown/css/style.css"> <!-- Aplica animaciones y estilos al hacer scroll -->
   <link rel="stylesheet" href="utilities/theme/css/style.css"><!-- Estilo del tema -->
   <link rel="stylesheet" href="utilities/mobirise/css/mbr-additional.css" type="text/css"> <!-- estilo del nav -->
+  <script type="text/javascript" src="validacion.js"></script>
   <title>Ley de Ohm | Escuela Superior de Cómputo</title>  
 </head>
 <body>
@@ -42,22 +43,22 @@
                 <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
                     <h1 class="mbr-section-title display-1">¡Regístrate!</h1>
                     <p class="text-black">Introduce tu información para registrarte en el sistema:</p>
-                    <form action="registraAlumno" method="post" class="form">
+                    <form action="registraAlumno" method="post" class="form" id="registroAlumno">
                         <div class="col-md-8">
                             <label for="nombre" class="text-black">Nombre Completo:</label>
-                            <input type="text" class="form-control" placeholder="Nombre Completo" id="nombre" name="nombre" required/>
+                            <input type="text" class="form-control" placeholder="Nombre Completo" id="nombre" name="nombre" pattern="[A-Za-z].{4,16}" title="4 a 16 caracteres" required/>
                         </div>
                         <div class="col-md-offset-8">
                             <label for="grupo" class="text-black">Grupo:</label>
-                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" required/>
+                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" title="Ej. 1CM11" required />
                         </div>
                         <div class="col-md-6">
                             <label for="user" class="text-black">Número de Boleta:</label>
-                            <input type="text" class="form-control" placeholder="Número de Boleta" id="user" name="user" required/>
+                            <input type="text" class="form-control" placeholder="Número de Boleta" id="user" name="user" pattern="[0-9]{10}"  title="Solo 10 numeros" required/>
                         </div>
                         <div class="col-md-offset-6">
                             <label for="mail" class="text-black">Correo Electrónico:</label>
-                            <input class="form-control" type="mail" name="mail" id="mail" placeholder="Correo Electrónico" required/>
+                            <input class="form-control" type="mail" name="mail" id="mail" placeholder="Correo Electrónico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Ej. ejemplo@mail.com" required/>
                         </div>
                         <div class="input-group-sm">
                             <br><input type="submit" value="Aceptar" class="btn btn-black btn-lg btn-black-outline"/>
