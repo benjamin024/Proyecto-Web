@@ -16,8 +16,8 @@
             <div class="mbr-table">
                 <div class="mbr-table-cell">
                     <div class="navbar-brand">
-                        <a href="index.html" class="navbar-logo"><img src="utilities/images/logoescom-182x128-95.png"></a>
-                        <a class="navbar-caption text-white" href="index.html">Escuela Superior de Cómputo</a>
+                        <a href="administrador" class="navbar-logo"><img src="utilities/images/logoescom-182x128-95.png"></a>
+                        <a class="navbar-caption text-white" href="administrador">Escuela Superior de Cómputo</a>
                     </div>
                 </div>
                 <div class="mbr-table-cell">
@@ -41,7 +41,7 @@
                 <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
                     <h1 class="mbr-section-title display-1">¡Nuevo profesor!</h1>
                     <p class="text-black">Introduce la información para registrarlo en el sistema:</p>
-                    <form action="registraAlumno" method="post" class="form">
+                    <form action="registraProfesor" method="post" class="form">
                         <div class="col-md-8">
                             <label for="nombre" class="text-black">Nombre Completo:</label>
                             <input type="text" class="form-control" placeholder="Nombre Completo" id="nombre" name="nombre" required/>
@@ -50,17 +50,21 @@
                             <label for="grupo" class="text-black">Grupo:</label>
                             <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" required/>
                         </div>
-                        <div class="col-md-12">
+                          <div class="col-md-8">
                             <label for="mail" class="text-black">Correo Electrónico:</label>
-                            <input class="form-control" type="mail" name="mail" id="mail" placeholder="Correo Electrónico" required/>
+                            <input class="form-control" type="email" name="mail" id="mail" placeholder="Correo Electrónico" required/>
+                        </div>
+                        <div class="col-md-offset-8">
+                            <label for="mail" class="text-black">Usuario:</label>
+                            <input class="form-control" type="text" name="user" id="user" placeholder="Correo Electrónico" required/>
                         </div>
                         <div class="col-md-6">
                             <label for="user" class="text-black">Contraseña</label>
-                            <input type="text" class="form-control" placeholder="Contraseña" id="pass" name="pass" required/>
+                            <input type="password" class="form-control" placeholder="Contraseña" id="pass" name="pass" required/>
                         </div>
                         <div class="col-md-offset-6">
                             <label for="user" class="text-black">Confirmar Contraseña:</label>
-                            <input type="text" class="form-control" placeholder="Confirmar Contraseña" id="password" name="password" required/>
+                            <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="password" name="password" required/>
                         </div>
                         
                         <div class="input-group-sm">
