@@ -29,7 +29,7 @@ xsi:noNamespaceSchemaLocation="esquema.xsd">
   <usuario id="2015630118" activo="0" tipo="3">
     <nombre>Isa Herrera Becerra</nombre>
     <grupo>2CM11</grupo>
-    <mail>ma_isahb@hotmail.com</mail>
+    <email>ma_isahb@hotmail.com</email>
     <password>IHerreraB11</password>
   </usuario>
 </usuarios>

@@ -15,7 +15,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-public class profesor extends HttpServlet {
+public class administrador extends HttpServlet {
     
     private String rutaXML;
     
@@ -43,6 +43,7 @@ public class profesor extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset='UTF-8'>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"><!--Para poder usar iconos-->");
             out.println("<link rel='shortcut icon' href='utilities/images/logoescom-182x128-95.png' type='image/x-icon'>");
             out.println("<link rel='stylesheet' href='utilities/bootstrap/css/bootstrap.min.css'> <!-- Ayuda al diseño responsivo -->");
             out.println("<link rel='stylesheet' href='utilities/dropdown/css/style.css'> <!-- Aplica animaciones y estilos al hacer scroll -->");
@@ -57,18 +58,20 @@ public class profesor extends HttpServlet {
             out.println("<div class='mbr-table'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
-           out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-            out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
+            out.println("<a href='indexProf.html' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+            out.println("<a class='navbar-caption text-white' href='indexProf.html'>Escuela Superior de Cómputo</a>");
             out.println("</div>");
             out.println("</div>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
+             out.println("<ul  class='nav-dropdown collapse pull-xs-left nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='formProfesor.html' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-pencil'></span>Registrar Profesor</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='eligeAlumno' aria-expanded='false'  style='color: #FFFFFF;'> <span class='glyphicon glyphicon-list-alt'></span>Ver Profesores</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='eligeAlumno' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-education'></span>Ver Grupos</a></li>");
+            out.println("</ul>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
             try {
                 out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
             } catch (Exception ex) {

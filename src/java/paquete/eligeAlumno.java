@@ -60,12 +60,23 @@ public class eligeAlumno extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset='UTF-8'>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
             out.println("<link rel='shortcut icon' href='utilities/images/logoescom-182x128-95.png' type='image/x-icon'>");
             out.println("<link rel='stylesheet' href='utilities/bootstrap/css/bootstrap.min.css'> <!-- Ayuda al diseño responsivo -->");
             out.println("<link rel='stylesheet' href='utilities/dropdown/css/style.css'> <!-- Aplica animaciones y estilos al hacer scroll -->");
             out.println("<link rel='stylesheet' href='utilities/theme/css/style.css'><!-- Estilo del tema -->");
             out.println("<link rel='stylesheet' href='utilities/mobirise/css/mbr-additional.css' type='text/css'> <!-- estilo del nav -->");
+            
+           //out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>");
+           //out.println("<script src='http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js'></script>");
+            out.println("<script type='text/javascript' src='utilities/JQDataTable/jquery.js'></script>");
+            out.println("<script type='text/javascript' src='utilities/JQDataTable/jquery.dataTables.min.js'></script>");
+            //out.println("<script src='utilities/jquery/jquery-3.1.1.js'></script>");
+            out.println("<script src='utilities/bootstrap/js/bootstrap.min.js'></script>");
+            out.println("<script src='utilities/dropdown/js/script.min.js'></script>");
+            
             out.println("<title>Ley de Ohm | Escuela Superior de Cómputo</title>  ");
+            out.println(" <script> $(function(){$('#datos').dataTable();})</script><!--Se implementa la funcion para el manejo de la tabla con jquery datatable-->");
             out.println("</head>");
             out.println("<body>");
             out.println("<section id='menu-0'>");
@@ -110,9 +121,8 @@ public class eligeAlumno extends HttpServlet {
                         out.println("<td>" + solicitudes[i][0] + "</td>");
                         out.println("<td>" + solicitudes[i][1] + "</td>");
                         out.println("<td>" + solicitudes[i][2] + "</td>");
-                        out.println("<td><a href='modificarDatos?user="+solicitudes[i][0]+"'>Modificar</a></td>");
-                        out.println("<td><a href='Borra?user="+solicitudes[i][0]+"'>Eliminar</a></td>");//cambia aqui a donde lo quieras mandar
-                        //y ya solo recuperas el user checa como esta en el servlet cambiaEstado 
+                        out.println("<td><a href='modificarDatos?user="+solicitudes[i][0]+"'><span class=\"glyphicon glyphicon-edit\"></span>Modificar</a></td>");
+                        out.println("<td><a href='Borra2?user="+solicitudes[i][0]+"'><span class=\"glyphicon glyphicon-remove\"></span>Eliminar</a></td>");
                         out.println("</tr>");
                    }
                     out.println("</tbody>");

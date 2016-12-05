@@ -21,19 +21,44 @@ import java.util.Properties;
 public class modificarDatos extends HttpServlet {
     
     private String rutaXML;
+    
+          
+    
+     private String[] obtenDatos(String user) throws Exception{
+         
+         String[ ] datos = new String[3];
+         
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(rutaXML + "/usuarios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();  
+        for(Element hijo: hijosRaiz){  
+            if(hijo.getAttributeValue("id").equals(user)){
+                datos[0]=hijo.getChildText("nombre");
+                datos[1]=hijo.getChildText("grupo");
+                datos[2]=hijo.getChildText("email");
+                
+            }
+        }
+        return datos;
+    }
+
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try{
+        
             String user = request.getParameter("user");
+            String[ ] datos = new String[3];
+        try {
+            datos=obtenDatos(user);
+        } catch (Exception ex) {
+            Logger.getLogger(modificarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
             rutaXML = request.getRealPath("/") + "xml";
             //response.sendRedirect("eligeAlumno");
-        }
-         catch (Exception ex) {
-            Logger.getLogger(cambiaEstado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
          out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -79,28 +104,28 @@ public class modificarDatos extends HttpServlet {
     out.println("<div class='mbr-table-cell'>");
        out.println(" <div class='container'>");
          out.println("   <div class='row'>");
-                <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
-                    <h1 class="mbr-section-title display-1">¡Regístrate!</h1>
-                    <p class="text-black">Introduce tu información para registrarte en el sistema:</p>
-                    <form action="registraAlumno" method="post" class="form">
-                        <div class="col-md-8">
-                            <label for="nombre" class="text-black">Nombre Completo:</label>
-                            <input type="text" class="form-control" placeholder="Nombre Completo" id="nombre" name="nombre" required/>
-                        </div>
-                        <div class="col-md-offset-8">
-                            <label for="grupo" class="text-black">Grupo:</label>
-                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" required/>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="user" class="text-black">Número de Boleta:</label>
-                            <input type="text" class="form-control" placeholder="Número de Boleta" id="user" name="user" required/>
-                        </div>
-                        <div class="col-md-offset-6">
-                            <label for="mail" class="text-black">Correo Electrónico:</label>
-                            <input class="form-control" type="mail" name="mail" id="mail" placeholder="Correo Electrónico" required/>
-                        </div>
-                        <div class="input-group-sm">
-                            <br><input type="submit" value="Aceptar" class="btn btn-black btn-lg btn-black-outline"/>
+              out.println("   <div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
+                   out.println("  <h1 class='mbr-section-title display-1'>¡Actualiza los datos!</h1>");
+                    out.println(" <p class='text-black'>Modifica los campos que sean necesarios:</p>");
+                    out.println(" <form action='actualizar' method='post' class='form'>");
+                       out.println("  <div class='col-md-8'>");
+                            out.println(" <label for='nombre' class='text-black'>Nombre Completo:</label>");
+                           out.println("  <input type='text' class='form-control' placeholder='Nombre Completo' id='nombre' name='nombre' value='"+datos[0]+"' required/>");
+                       out.println("  </div>");
+                       out.println("  <div class='col-md-offset-8'>");
+                            out.println(" <label for='grupo' class='text-black'>Grupo:</label>");
+                            out.println(" <input type='text' class='form-control' placeholder='Grupo' id='grupo' name='grupo' value='"+datos[1]+"' required/>");
+                       out.println("  </div>");
+                        out.println(" <div class='col-md-6'>");
+                            out.println(" <label for='user' class='text-black'>Número de Boleta:</label>");
+                            out.println(" <input type='text' class='form-control' placeholder='Número de Boleta' id='user' name='user' value='"+user+"' required/>");
+                       out.println("  </div>");
+                       out.println("  <div class='col-md-offset-6'>");
+                            out.println("<label for='mail' class='text-black'>Correo Electrónico:</label>");
+                           out.println("  <input class='form-control' type='mail' name='mail' id='mail' placeholder='Correo Electrónico' value='"+datos[2]+"' required/>");
+                        out.println(" </div>");
+                       out.println("  <div class='input-group-sm'>");
+                            out.println(" <br><input type='submit' value='Actualizar' class='btn btn-black btn-lg btn-black-outline'/>");
                        out.println(" </div></form></div></div></div></div></section>");
             
             //
