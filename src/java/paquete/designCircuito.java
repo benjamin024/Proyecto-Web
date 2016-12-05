@@ -87,8 +87,6 @@ public class designCircuito extends HttpServlet {
         out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
         out.println("<h5 class='mbr-section-title'>Diseña el circuito</h5>");
         out.println("<iframe src=sim.html height=600 width=950 style='border: none;'></iframe>");
-        
-        
         out.println("</div>");
         out.println("</div>");
         out.println("</div>");
