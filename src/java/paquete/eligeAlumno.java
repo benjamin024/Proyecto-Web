@@ -86,7 +86,7 @@ public class eligeAlumno extends HttpServlet {
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
             out.println("<a href='indexProf.html' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-            out.println("<a class='navbar-caption text-white' href='indexProf.html'>Escuela Superior de Cómputo</a>");
+            out.println("<a class='navbar-caption text-white' href='administrador'>Escuela Superior de Cómputo</a>");
             out.println("</div>");
             out.println("</div>");
             out.println("<div class='mbr-table-cell'>");
@@ -113,8 +113,8 @@ public class eligeAlumno extends HttpServlet {
                 //else{
                     out.println("<h2>Solicitudes para inscribirse al grupo</h2>");
                     String[][] solicitudes = getSolicitudes();
-                    out.println("<table class='table table-bordered table-hover'>");
-                    out.println("<thead><tr><th>Usuario</th><th>Nombre Completo</th><th>Correo Electrónico</th><th></th></tr></thead>");
+                    out.println("<table class='table table-bordered table-hover' id='datos'>");
+                    out.println("<thead><tr><th>Usuario</th><th>Nombre Completo</th><th>Correo Electrónico</th><th>Opcion 1</th><th>Opcion 2</th></tr></thead>");
                     out.println("<tbody>");
                     for(int i = 0; i < solicitudes.length; i++){
                         out.println("<tr>");
@@ -141,7 +141,7 @@ public class eligeAlumno extends HttpServlet {
             out.println("<p class='text-xs-center' style='color: #FFFFFF;'>Escuela superior de Cómputo<br>Tecnologías para la Web</p>");
             out.println("</div>");
             out.println("</footer>");
-            out.println("<script src='utilities/jquery/jquery-3.1.1.js'></script>");
+            //out.println("<script src='utilities/jquery/jquery-3.1.1.js'></script>");
             out.println("<script src='utilities/bootstrap/js/bootstrap.min.js'></script>");
             out.println("<script src='utilities/dropdown/js/script.min.js'></script>");
             out.println("</body>");
