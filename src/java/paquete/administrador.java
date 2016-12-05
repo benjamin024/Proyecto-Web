@@ -68,8 +68,8 @@ public class administrador extends HttpServlet {
             out.println("</button>");
              out.println("<ul  class='nav-dropdown collapse pull-xs-left nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
              out.println("<li class='nav-item'><a class='nav-link link' href='formProfesor.html' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-pencil'></span>Registrar Profesor</a></li>");
-             out.println("<li class='nav-item'><a class='nav-link link' href='formRegistra.html' aria-expanded='false'  style='color: #FFFFFF;'> <span class='glyphicon glyphicon-list-alt'></span>Ver Profesores</a></li>");
-             out.println("<li class='nav-item'><a class='nav-link link' href='formRegistra.html' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-education'></span>Ver Grupos</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='eligeAlumno' aria-expanded='false'  style='color: #FFFFFF;'> <span class='glyphicon glyphicon-list-alt'></span>Ver Profesores</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='eligeAlumno' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-education'></span>Ver Grupos</a></li>");
             out.println("</ul>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
             try {

@@ -59,12 +59,13 @@ public class login extends HttpServlet {
                 if(ok){ //usuario y contraseña correctas
                     switch(tipoUsuario){
                         case 1:
-                             
+                             HttpSession sesion = request.getSession();
+                             sesion.setAttribute("nombre", nombre);
                             out.println("Bienvenido " + usuario);
-                            response.sendRedirect("eligeAlumno");
+                            response.sendRedirect("administrador");
                             break;
                         case 2:
-                            HttpSession sesion = request.getSession();
+                            sesion = request.getSession();
                             sesion.setAttribute("nombre", nombre);
                             sesion.setAttribute("user", usuario);
                             sesion.setAttribute("grupo", grupo);
