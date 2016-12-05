@@ -15,8 +15,8 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-public class profesor extends HttpServlet {
-    
+public class formEjercicio extends HttpServlet {
+
     private String rutaXML;
     
     private int getSolicitudes(String grupo) throws Exception{
@@ -48,6 +48,7 @@ public class profesor extends HttpServlet {
             out.println("<link rel='stylesheet' href='utilities/dropdown/css/style.css'> <!-- Aplica animaciones y estilos al hacer scroll -->");
             out.println("<link rel='stylesheet' href='utilities/theme/css/style.css'><!-- Estilo del tema -->");
             out.println("<link rel='stylesheet' href='utilities/mobirise/css/mbr-additional.css' type='text/css'> <!-- estilo del nav -->");
+            out.println("<link rel='stylesheet' href='utilities/archivos/archivos.css' type='text/css'>");
             out.println("<title>Ley de Ohm | Escuela Superior de Cómputo</title>  ");
             out.println("</head>");
             out.println("<body>");
@@ -57,7 +58,7 @@ public class profesor extends HttpServlet {
             out.println("<div class='mbr-table'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
-           out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+            out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
             out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
             out.println("</div>");
             out.println("</div>");
@@ -72,7 +73,7 @@ public class profesor extends HttpServlet {
             try {
                 out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
             } catch (Exception ex) {
-                Logger.getLogger(profesor.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.toString());
             }
             out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
             out.println("</ul>");
@@ -81,12 +82,27 @@ public class profesor extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
             out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
-            out.println("<h1 class='mbr-section-title display-1'>Bienvendid@ " + sesion.getAttribute("nombre") +"</h1>");
+            out.println("<h5 class='mbr-section-title'>Nuevo Ejercicio</h5>");
+            out.println("<form action='nuevoEjercicio' method='post' enctype='multipart/form-data'>");
+            out.println("Sube la imagen del circuito:<br>");
+            out.println("<input class='btn btn-default btn-file' type='file' id='files' name='files[]' required/><br>");
+            out.println("Si no tienes la imagen aún, puedes <a href='circuito'>Diseñar un circuito</a><br><br>");
+            out.println("<output id='list'></output><br><br>");
+            out.println("Instrucciones: <input type='text' name='instru' class=form-control required/><br>");
+            out.println("<table class='table'>");
+            out.println("<thead><tr><th>No.</th><th>Pregunta</th><th>Respuesta</th><th></th></tr></thead>");
+            out.println("<tbody id=cuerpoTabla>");
+            out.println("<tr><td>1</td><td><input type=text class=form-control name=pregunta1 required/></td><td><input type=text  class=form-control  name=resp1 required/></td></tr>");
+            out.println("</tbody>");
+            out.println("</table>");
+            out.println("<div><input type=button id=mas size=1 value=+ onclick=agregaPregunta(); /><input type=button id='menos' size=1 value=- style='display: none;' onclick=eliminaPregunta(); /><br></div>");
+            out.println("<input type=submit value='Aceptar' class='btn btn-lg btn-black-outline btn-black'>");
+            out.println("</form>");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>");
@@ -100,6 +116,7 @@ public class profesor extends HttpServlet {
             out.println("<script src='utilities/jquery/jquery-3.1.1.js'></script>");
             out.println("<script src='utilities/bootstrap/js/bootstrap.min.js'></script>");
             out.println("<script src='utilities/dropdown/js/script.min.js'></script>");
+            out.println("<script src='utilities/archivos/archivos.js'></script>");
             out.println("</body>");
             out.println("</html>");
     }

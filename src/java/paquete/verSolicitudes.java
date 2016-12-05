@@ -74,8 +74,8 @@ public class verSolicitudes extends HttpServlet {
             out.println("<div class='mbr-table'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
-            out.println("<a href='indexProf.html' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-            out.println("<a class='navbar-caption text-white' href='indexProf.html'>Escuela Superior de Cómputo</a>");
+            out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+            out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
             out.println("</div>");
             out.println("</div>");
             out.println("<div class='mbr-table-cell'>");
@@ -83,6 +83,9 @@ public class verSolicitudes extends HttpServlet {
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
             try {
                 out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getNumSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
             } catch (Exception ex) {
