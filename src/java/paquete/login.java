@@ -69,6 +69,7 @@ public class login extends HttpServlet {
                             sesion.setAttribute("nombre", nombre);
                             sesion.setAttribute("user", usuario);
                             sesion.setAttribute("grupo", grupo);
+                            sesion.setAttribute("tipo", tipoUsuario);
                             response.sendRedirect("profesor");
                             break;
                         case 3:

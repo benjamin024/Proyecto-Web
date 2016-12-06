@@ -1,10 +1,14 @@
 package paquete;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -61,6 +65,21 @@ public class nuevoEjercicio extends HttpServlet {
         nombre = nombre.replace("Ö","o");
         nombre = nombre.replace("Ü","u");
         return nombre;
+    }
+    
+    private String getFecha(){
+        Locale l = new Locale("es","MX");
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Mexico_City"),l);
+        return cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR);
+        
+    }
+    
+    private int getID() throws Exception{
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(ruta + "xml\\ejercicios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();
+        return hijosRaiz.size() + 1;
     }
     
     private String getNombre(String n){
@@ -135,9 +154,13 @@ public class nuevoEjercicio extends HttpServlet {
         Element ejercicio = new Element("ejercicio");
         Element imagen = new Element("imagen");
         Element instrucciones = new Element("instrucciones");
+        Element fecha = new Element("fecha");
         Element[] pregunta = new Element[5];
         
+        ejercicio.setAttribute("ID", getID() + "");
         ejercicio.setAttribute("grupo",grupo);
+        fecha.setText(getFecha());
+        ejercicio.addContent(fecha);
         instrucciones.setText(this.instrucciones);
         ejercicio.addContent(instrucciones);
         imagen.setText(nombre);

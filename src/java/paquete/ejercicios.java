@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package paquete;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +19,12 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-/**
- *
- * @author benja
- */
 public class ejercicios extends HttpServlet {
 
      private String rutaXML;
+     private List<Element> ejercicios = new ArrayList<Element>();
+
+
     
     private int getSolicitudes(String grupo) throws Exception{
         int cont = 0;
@@ -37,6 +37,18 @@ public class ejercicios extends HttpServlet {
                 cont++;
         }
         return cont;
+    }
+    
+    private void getEjercicios(String grupo, String ruta) throws Exception{
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(ruta + "xml\\ejercicios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();
+         for (Element ejercicio : hijosRaiz){
+             if(ejercicio.getAttributeValue("grupo").equals(grupo)){
+                 ejercicios.add(ejercicio);
+             }
+         }
     }
 
     @Override
@@ -95,9 +107,25 @@ public class ejercicios extends HttpServlet {
         out.println("<div class='row'>");
         out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
         out.println("<h5 class='mbr-section-title'>Mis Ejercicios</h5>");
-        
-        
-        
+         try {
+             getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"));
+         } catch (Exception ex) {
+             Logger.getLogger(ejercicios.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        String destino;
+        String tipo = sesion.getAttribute("tipo").toString();
+        if(tipo.equals("2"))
+            destino = "formEditaEjercicio";
+        else
+            destino = "formResuelveEjercicio";
+        if(ejercicios.size() > 0){
+            for(Element ejercicio: ejercicios){
+            out.println("<div class='img'><a href=" + destino + "?id="+ejercicio.getAttributeValue("ID")+" ><img src='imagenesEjercicios/" + ejercicio.getChildText("imagen") + "' width=300 height=200 /></a>");
+            out.println("<div class='desc'>" + ejercicio.getChildText("fecha") + "</div></div>");
+            }
+        }else
+            out.println("<h5>No hay ejercicios</h5>");
+        ejercicios.clear();
         out.println("</div>");
         out.println("</div>");
         out.println("</div>");
