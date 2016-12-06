@@ -82,37 +82,37 @@ public class ejercicios extends HttpServlet {
         out.println("<div class='mbr-table-cell'>");
         out.println("<div class='navbar-brand'>");
         out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-        out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
-        out.println("</div>");
-        out.println("</div>");
-        out.println("<div class='mbr-table-cell'>");
-        out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
-        out.println("<div class='hamburger-icon'></div>");
-        out.println("</button>");
-        out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
-        out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
-        out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
-        out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
-        try {
-            out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
-        out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
-        out.println("</ul>");
-        out.println("</div>");
-        out.println("</div>");
-        out.println("</div>");
-        out.println("</nav>");
-        out.println("</section>");
-        out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
-        out.println("<div class='mbr-table-cell'>");
-        out.println("<div class='container'>");
-        out.println("<div class='row'>");
-        out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
-        out.println("<h5 class='mbr-section-title'>Mis Ejercicios</h5>");
         String tipo = sesion.getAttribute("tipo").toString();
         if(tipo.equals("2")){
+            out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("<div class='mbr-table-cell'>");
+            out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
+            out.println("<div class='hamburger-icon'></div>");
+            out.println("</button>");
+            out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
+            try {
+                out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            }
+            out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
+            out.println("</ul>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</nav>");
+            out.println("</section>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
+            out.println("<div class='mbr-table-cell'>");
+            out.println("<div class='container'>");
+            out.println("<div class='row'>");
+            out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
+            out.println("<h5 class='mbr-section-title'>Mis Ejercicios</h5>");
             try {
                 getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"));
             } catch (Exception ex) {
@@ -127,6 +127,28 @@ public class ejercicios extends HttpServlet {
                 out.println("<h5>No hay ejercicios</h5>");
             ejercicios.clear();
         }else{
+            out.println("<a class='navbar-caption text-white' href='administrador'>Escuela Superior de Cómputo</a>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("<div class='mbr-table-cell'>");
+            out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
+            out.println("<div class='hamburger-icon'></div>");
+            out.println("</button>");
+            out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
+            out.println("</ul>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</nav>");
+            out.println("</section>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
+            out.println("<div class='mbr-table-cell'>");
+            out.println("<div class='container'>");
+            out.println("<div class='row'>");
+            out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
+            out.println("<h1 class='mbr-section-title display-1'>Mis Ejercicios</h1>");
             out.println("<h5>Eres un alumno terrenal, aún no está programado esto</h5>");
         }     
         out.println("</div>");

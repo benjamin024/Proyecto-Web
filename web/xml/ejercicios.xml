@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <ejercicios>
+  <ejercicio ID="1" grupo="2CM11">
+    <fecha>5/12/2016</fecha>
+    <instrucciones>qeqeq</instrucciones>
+    <imagen>descarga.jpg</imagen>
+    <pregunta respuesta="asdds">adsdas</pregunta>
+  </ejercicio>
 </ejercicios>
+
