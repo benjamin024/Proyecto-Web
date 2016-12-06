@@ -74,7 +74,12 @@ public class login extends HttpServlet {
                             break;
                         case 3:
                             if(activo == 1){
-                                out.println("Bienvenido " + usuario);
+                                sesion = request.getSession();
+                                sesion.setAttribute("nombre", nombre);
+                                sesion.setAttribute("user", usuario);
+                                sesion.setAttribute("grupo", grupo);
+                                sesion.setAttribute("tipo", tipoUsuario);
+                                response.sendRedirect("alumno");
                             }else{
                                 out.println("Usuario Inactivo");
                             }
