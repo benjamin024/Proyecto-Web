@@ -111,7 +111,7 @@ public class eligeAlumno extends HttpServlet {
                // if(getNumSolicitudes(sesion.getAttribute("grupo").toString()) == 0)
                    // out.println("<h4>Por el momento no hay nuevas solicitudes para inscribirse a este grupo</h4>");
                 //else{
-                    out.println("<h2>Solicitudes para inscribirse al grupo</h2>");
+                    out.println("<h2>Listado de Alumnos</h2>");
                     String[][] solicitudes = getSolicitudes();
                     out.println("<table class='table table-bordered table-hover' id='datos'>");
                     out.println("<thead><tr><th>Usuario</th><th>Nombre Completo</th><th>Correo Electrónico</th><th>Opcion 1</th><th>Opcion 2</th></tr></thead>");
