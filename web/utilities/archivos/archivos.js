@@ -27,10 +27,7 @@ var cont = 1;
 function agregaPregunta(){
   document.getElementById("menos").style.display = "block";
   cont++;
-  document.getElementById("cuerpoTabla").innerHTML += "<tr id=fila"+cont+"><td>"+cont+"</td><td><input type=text class=form-control name=pregunta"+cont+" required/></td><td>\n\
-<input type=text  class=form-control  name=correcta"+cont+" required/></td>\n\
-<td><input type=text  class=form-control  name=respa"+cont+" required/></td>\n\
-<td><input type=text  class=form-control  name=respb"+cont+" required/></td></tr>";
+  document.getElementById("cuerpoTabla").innerHTML += "<tr id=fila"+cont+"><td>"+cont+"</td><td><input type=text class=form-control name=pregunta"+cont+" required/></td><td><input type=text  class=form-control  name=resp"+cont+" required/></td></tr>";
   if(cont >= 5)
     document.getElementById("mas").style.display = "none";
 }
