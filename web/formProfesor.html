@@ -2,11 +2,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="shortcut icon" href="utilities/images/logoescom-182x128-95.png" type="image/x-icon">
   <link rel="stylesheet" href="utilities/bootstrap/css/bootstrap.min.css"> <!-- Ayuda al diseño responsivo -->
   <link rel="stylesheet" href="utilities/dropdown/css/style.css"> <!-- Aplica animaciones y estilos al hacer scroll -->
   <link rel="stylesheet" href="utilities/theme/css/style.css"><!-- Estilo del tema -->
   <link rel="stylesheet" href="utilities/mobirise/css/mbr-additional.css" type="text/css"> <!-- estilo del nav -->
+  <script type="text/javascript" src="utilities/js/funciones.js"></script>
   <title>Ley de Ohm | Escuela Superior de Cómputo</title>  
 </head>
 <body>
@@ -48,7 +50,14 @@
                         </div>
                         <div class="col-md-offset-8">
                             <label for="grupo" class="text-black">Grupo:</label>
-                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" required/>
+                            <select class="form-control" id="grupo" name="grupo"></select>
+                            <button type="button" class="btn btn-default btn-sm" id="boton" value="0" onclick="nuevoGrupo();">
+                                <span class="glyphicon glyphicon-plus" ></span>
+                              </button>
+                            <div id="nuevo" style="display:none;">
+                            Ingrese el grupo:<input type="text" class="form-control" id="grupon" name="grupon" placeholder="Nuevo grupo"/>	
+
+                            </div>
                         </div>
                           <div class="col-md-8">
                             <label for="mail" class="text-black">Correo Electrónico:</label>

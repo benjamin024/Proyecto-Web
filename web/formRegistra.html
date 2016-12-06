@@ -9,6 +9,32 @@
   <link rel="stylesheet" href="utilities/mobirise/css/mbr-additional.css" type="text/css"> <!-- estilo del nav -->
   <script type="text/javascript" src="validacion.js"></script>
   <title>Ley de Ohm | Escuela Superior de Cómputo</title>  
+  <script>
+  var txt=" ";
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+   		if (this.readyState == 4 && this.status == 200) {
+
+        myFunction(this);
+   		 }
+		};
+		xhttp.open("GET", "grupos.xml", true);
+		xhttp.send();
+		function myFunction(xml) {
+
+		var  y, i,yLen, xmlDoc;
+    	xmlDoc = xml.responseXML;
+		y = xmlDoc.getElementsByTagName("grupo");
+    	yLen = y.length;
+    	  var x = document.getElementById("grupo");
+    	for (i = 0; i < yLen; i++) { 
+        	
+		   	var option = document.createElement("option");
+		    option.text =y[i].childNodes[0].nodeValue;
+		    x.add(option);
+        }
+       	}
+       </script>
 </head>
 <body>
 <section id="menu-0">
@@ -50,7 +76,8 @@
                         </div>
                         <div class="col-md-offset-8">
                             <label for="grupo" class="text-black">Grupo:</label>
-                            <input type="text" class="form-control" placeholder="Grupo" id="grupo" name="grupo" title="Ej. 1CM11" required />
+                            <select class="form-control" name="grupo" id="grupo"></select>
+                            
                         </div>
                         <div class="col-md-6">
                             <label for="user" class="text-black">Número de Boleta:</label>
