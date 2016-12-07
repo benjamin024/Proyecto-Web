@@ -95,9 +95,12 @@ public class formEjercicio extends HttpServlet {
             out.println("<output id='list'></output><br><br>");
             out.println("Instrucciones: <input type='text' name='instru' class=form-control required/><br>");
             out.println("<table class='table'>");
-            out.println("<thead><tr><th>No.</th><th>Pregunta</th><th>Respuesta</th><th></th></tr></thead>");
+            out.println("<thead><tr><th>No.</th><th>Pregunta</th><th>Respuesta Correcta</th><th>Opcion 2</th><th>Opcion 3</th></tr></thead>");
             out.println("<tbody id=cuerpoTabla>");
-            out.println("<tr><td>1</td><td><input type=text class=form-control name=pregunta1 required/></td><td><input type=text  class=form-control  name=resp1 required/></td></tr>");
+            out.println("<tr><td>1</td><td><input type=text class=form-control name=pregunta1 required/></td>"
+                    + "<td><input type=text  class=form-control  name=correcta1 required/></td>"
+                    + "<td><input type=text  class=form-control  name=respA1 required/></td>"
+                    + "<td><input type=text  class=form-control  name=respB1 required/></td></tr>");
             out.println("</tbody>");
             out.println("</table>");
             out.println("<div><input type=button id=mas size=1 value=+ onclick=agregaPregunta(); /><input type=button id='menos' size=1 value=- style='display: none;' onclick=eliminaPregunta(); /><br></div>");
