@@ -122,7 +122,7 @@ public class eligeProfesor extends HttpServlet {
                         out.println("<td>" + solicitudes[i][1] + "</td>");
                         out.println("<td>" + solicitudes[i][2] + "</td>");
                         out.println("<td><a href='modificarDatos?user="+solicitudes[i][0]+"'><span class=\"glyphicon glyphicon-edit\"></span>Modificar</a></td>");
-                        out.println("<td><a href='Borra?user="+solicitudes[i][0]+"'><span class=\"glyphicon glyphicon-remove\"></span>Eliminar</a></td>");
+                        out.println("<td><a href='BorraProfesor?user="+solicitudes[i][0]+"'><span class=\"glyphicon glyphicon-remove\"></span>Eliminar</a></td>");
                         out.println("</tr>");
                    }
                     out.println("</tbody>");
