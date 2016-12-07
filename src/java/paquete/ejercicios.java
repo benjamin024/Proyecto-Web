@@ -51,8 +51,28 @@ public class ejercicios extends HttpServlet {
          }
     }
     
-    private void getEjercicios(String grupo, String ruta, String alumno){
-        
+    private void getEjercicios(String grupo, String ruta, String alumno) throws Exception{
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(ruta + "xml\\ejercicios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();
+         for (Element ejercicio : hijosRaiz){
+             if(ejercicio.getAttributeValue("grupo").equals(grupo) && !fueContestado(ruta, alumno, ejercicio.getAttributeValue("ID"))){
+                 ejercicios.add(ejercicio);
+             }
+         }
+    }
+    
+    private boolean fueContestado(String ruta, String alumno, String ID) throws Exception {
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(ruta + "xml\\ejerciciosResueltos.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();
+         for (Element ejercicio : hijosRaiz){
+             if(ejercicio.getAttributeValue("IdEjercicio").equals(ID) && ejercicio.getChildText("alumno").equals(alumno))
+                 return true;
+         }
+         return false;
     }
 
     @Override
@@ -149,7 +169,19 @@ public class ejercicios extends HttpServlet {
             out.println("<div class='row'>");
             out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
             out.println("<h1 class='mbr-section-title display-1'>Mis Ejercicios</h1>");
-            out.println("<h5>Eres un alumno terrenal, aún no está programado esto</h5>");
+            try {
+                getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"), sesion.getAttribute("user").toString());
+            } catch (Exception ex) {
+                Logger.getLogger(ejercicios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(ejercicios.size() > 0){
+                for(Element ejercicio: ejercicios){
+                    out.println("<div class='img'><a href=formResuelveEjercicio?id="+ejercicio.getAttributeValue("ID")+" ><img src='imagenesEjercicios/" + ejercicio.getChildText("imagen") + "' width=300 height=200 /></a>");
+                    out.println("<div class='desc'>" + ejercicio.getChildText("fecha") + "</div></div>");
+                }
+            }else
+                out.println("<h5>No hay ejercicios</h5>");
+            ejercicios.clear();
         }     
         out.println("</div>");
         out.println("</div>");
@@ -168,4 +200,5 @@ public class ejercicios extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
     }
+
 }

@@ -1,7 +1,6 @@
 <ejerciciosResueltos>
-	<ejercicioResuelto IdEjercicio="1" revisado="no">
+	<ejercicioResuelto IdEjercicio="1">
 		<alumno>Alumno01</alumno>
-		<respuesta ID="1" cal="">12V</respuesta>
-		<respuesta ID="2" cal="">470k</respuesta>
+		<pregunta ID="1">2</pregunta>
 	</ejercicioResuelto>
 </ejerciciosResueltos>
