@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,31 +23,27 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 
-public class registraAlumno extends HttpServlet {
+public class actualizarAlumno extends HttpServlet {
     
     private String rutaXML;
     
-    public boolean registroAlumno(String nom, String grup, String user, String email, String pass) throws Exception{
+    public boolean modificar(String nom, String grup, String user, String email) throws Exception{
         SAXBuilder builder = new SAXBuilder(); 
         Document doc = builder.build(new FileInputStream(rutaXML + "/usuarios.xml"));
-        Element raiz = doc.getRootElement();
-        Element usuario = new Element("usuario");
-        Element nombre = new Element("nombre");
-        Element grupo = new Element ("grupo");
-        Element mail = new Element("email");
-        Element passw = new Element("password");
-        nombre.setText(nom);
-        grupo.setText(grup);
-        mail.setText(email);
-        passw.setText(pass);
-        usuario.setAttribute("id", user);
-        usuario.setAttribute("activo", "0");
-        usuario.setAttribute("tipo", "3");
-        usuario.addContent(nombre);
-        usuario.addContent(grupo);
-        usuario.addContent(mail);
-        usuario.addContent(passw);
-        raiz.addContent(usuario);
+        Element raiz = doc.getRootElement();  
+        
+            
+         
+        List<Element> hijosRaiz = raiz.getChildren();  
+        for(Element hijo: hijosRaiz){  
+            if(hijo.getAttributeValue("id").equals(user)){
+                hijo.getChild("nombre").setText(nom);
+                hijo.getChild("grupo").setText(grup);
+                hijo.getChild("email").setText(email);
+                
+                
+            }
+        }
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
         xmlOutput.output(doc, new FileWriter(rutaXML + "/usuarios.xml"));
@@ -62,13 +59,12 @@ public class registraAlumno extends HttpServlet {
             String grupo = request.getParameter("grupo");
             String user = request.getParameter("user");
             String mail = request.getParameter("mail");
-            String pass = request.getParameter("pass");
-            String confpass = request.getParameter("confpass");
             rutaXML = request.getRealPath("/") + "xml";
             try {
-                boolean ok = registroAlumno(nombre, grupo, user, mail, pass);
+                boolean ok = modificar(nombre, grupo, user, mail);
                 if(ok){
-                    out.println("Usuario registrado");
+                    out.println("Usuario actualizado");
+                    response.sendRedirect("alumno");
                 }else{
                     out.println("ERROR");
                 }
@@ -76,10 +72,5 @@ public class registraAlumno extends HttpServlet {
                 Logger.getLogger(registraAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-    }
-
-    private String generaPassword(String nom, String grup) {
-        String [] nombre = nom.split(" ");
-        return nombre[0].charAt(0) + nombre[1] + nombre[2].charAt(0) + grup.charAt(grup.length() - 2) + grup.charAt(grup.length() - 1);
     }
 }
