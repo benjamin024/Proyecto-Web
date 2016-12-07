@@ -26,7 +26,7 @@ public class registraAlumno extends HttpServlet {
     
     private String rutaXML;
     
-    public boolean registroAlumno(String nom, String grup, String user, String email) throws Exception{
+    public boolean registroAlumno(String nom, String grup, String user, String email, String pass) throws Exception{
         SAXBuilder builder = new SAXBuilder(); 
         Document doc = builder.build(new FileInputStream(rutaXML + "/usuarios.xml"));
         Element raiz = doc.getRootElement();
@@ -34,18 +34,18 @@ public class registraAlumno extends HttpServlet {
         Element nombre = new Element("nombre");
         Element grupo = new Element ("grupo");
         Element mail = new Element("email");
-        Element pass = new Element("password");
+        Element passw = new Element("password");
         nombre.setText(nom);
         grupo.setText(grup);
         mail.setText(email);
-        pass.setText("123");
+        passw.setText(pass);
         usuario.setAttribute("id", user);
         usuario.setAttribute("activo", "0");
         usuario.setAttribute("tipo", "3");
         usuario.addContent(nombre);
         usuario.addContent(grupo);
         usuario.addContent(mail);
-        usuario.addContent(pass);
+        usuario.addContent(passw);
         raiz.addContent(usuario);
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
@@ -62,9 +62,11 @@ public class registraAlumno extends HttpServlet {
             String grupo = request.getParameter("grupo");
             String user = request.getParameter("user");
             String mail = request.getParameter("mail");
+            String pass = request.getParameter("pass");
+            String confpass = request.getParameter("confpass");
             rutaXML = request.getRealPath("/") + "xml";
             try {
-                boolean ok = registroAlumno(nombre, grupo, user, mail);
+                boolean ok = registroAlumno(nombre, grupo, user, mail, pass);
                 if(ok){
                     out.println("Usuario registrado");
                 }else{
