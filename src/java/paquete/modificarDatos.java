@@ -77,8 +77,8 @@ public class modificarDatos extends HttpServlet {
             out.println("<div class='mbr-table'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
-            out.println("<a href='indexProf.html' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-            out.println("<a class='navbar-caption text-white' href='indexProf.html'>Escuela Superior de Cómputo</a>");
+            out.println("<a href='administrador' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+            out.println("<a class='navbar-caption text-white' href='administrador'>Escuela Superior de Cómputo</a>");
             out.println("</div>");
             out.println("</div>");
             out.println("<div class='mbr-table-cell'>");

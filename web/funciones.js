@@ -1,4 +1,5 @@
 var txt=" ";
+
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
    		if (this.readyState == 4 && this.status == 200) {
@@ -22,20 +23,25 @@ var txt=" ";
 		    x.add(option);
         }
        	}
+      
 function nuevoGrupo()
 		{
+                
 			var estado=document.getElementById("boton").value;
 			if(estado==0)
 			{
 			document.getElementById("grupo").disabled=true;
 			document.getElementById("nuevo").style.display='block';
 			document.getElementById("boton").value=1;
+                        document.getElementById("bandera").value=1;
 			}
 			else if(estado==1)
 			{
 				document.getElementById("nuevo").style.display='none';
 				document.getElementById("grupo").disabled=false;
 				document.getElementById("boton").value=0;
+                                document.getElementById("bandera").value=0;
+                               
 			}
 
 		}

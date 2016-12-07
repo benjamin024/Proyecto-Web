@@ -92,7 +92,9 @@ public class nuevoEjercicio extends HttpServlet {
     
     String instrucciones;
     String[] preguntas = new String[5];
-    String[] respuestas = new String[5];
+    String[] correctas = new String[5];
+    String[] respuestasA = new String[5];
+    String[] respuestasB = new String[5];
     String nombre;
     String ruta;
     String grupo;
@@ -132,8 +134,12 @@ public class nuevoEjercicio extends HttpServlet {
                     instrucciones = item.getString();
                 else if(campo.contains("pregunta"))
                     preguntas[Integer.parseInt(campo.charAt(campo.length()-1)+"")-1] = item.getString();
-                else if(campo.contains("resp")){
-                    respuestas[Integer.parseInt(campo.charAt(campo.length()-1)+"")-1] = item.getString();
+                else if(campo.contains("correcta"))
+                    correctas[Integer.parseInt(campo.charAt(campo.length()-1)+"")-1] = item.getString();
+                else if(campo.contains("respA"))
+                    respuestasA[Integer.parseInt(campo.charAt(campo.length()-1)+"")-1] = item.getString();
+                else if(campo.contains("respB")){
+                    respuestasB[Integer.parseInt(campo.charAt(campo.length()-1)+"")-1] = item.getString();
                     j++;
                 }
             }
@@ -156,6 +162,9 @@ public class nuevoEjercicio extends HttpServlet {
         Element instrucciones = new Element("instrucciones");
         Element fecha = new Element("fecha");
         Element[] pregunta = new Element[5];
+        Element[] correcta=new Element[5];
+        Element[] respA=new Element[5];
+        Element[] respB=new Element[5];
         
         ejercicio.setAttribute("ID", getID() + "");
         ejercicio.setAttribute("grupo",grupo);
@@ -165,12 +174,31 @@ public class nuevoEjercicio extends HttpServlet {
         ejercicio.addContent(instrucciones);
         imagen.setText(nombre);
         ejercicio.addContent(imagen);
-        
+        System.out.println("esto es J"+j);
         for(int i = 0; i < j; i++){
             pregunta[i] = new Element("pregunta");
-            pregunta[i].setAttribute("respuesta",respuestas[i]);
-            pregunta[i].setText(preguntas[i]);
+            pregunta[i].setAttribute("ID",Integer.toString(i+1));
+            pregunta[i].setAttribute("text",preguntas[i]);
+            correcta[i] = new Element("respuesta");
+            correcta[i].setAttribute("ID","1");
+            correcta[i].setText(correctas[i]);
+            
+            respA[i] = new Element("respuesta");
+            respA[i].setAttribute("ID","2");
+            respA[i].setText(respuestasA[i]);
+             respB[i] = new Element("respuesta");
+            respB[i].setAttribute("ID","3");
+            respB[i].setText(respuestasB[i]);
+            
+            
+            
+            pregunta[i].addContent(correcta[i]);
+            pregunta[i].addContent(respA[i]);
+            pregunta[i].addContent(respB[i]);
+            //pregunta[i].setAttribute("respuesta",correctas[i]);
+            //pregunta[i].setText(preguntas[i]);
             ejercicio.addContent(pregunta[i]);
+            System.out.println("esto es I"+i);
         }
         rootNode.addContent(ejercicio);
         

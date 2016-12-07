@@ -15,7 +15,7 @@ xsi:noNamespaceSchemaLocation="esquema.xsd">
     <password>123</password>
   </usuario>
   <usuario id="Profesor01" tipo="2">
-    <nombre>Profesor</nombre>
+    <nombre>Profesor 01</nombre>
     <grupo>2CM11</grupo>
     <email>benjamin.dorantes@hotmail.com</email>
     <password>123</password>
