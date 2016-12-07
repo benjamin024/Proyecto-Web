@@ -1,3 +1,24 @@
+var script = document.createElement('script');
+script.src = 'http://code.jquery.com/jquery-1.11.0.min.js';
+script.type = 'text/javascript';
+var path=""
+function path(){
+        //alert("antes");
+         //window.location ="path";
+         
+        $.ajax({
+               
+                url:   'path',
+                type:  'get',
+               
+                success:  function (response) {
+                        path=response;
+                }
+        });
+       
+}
+       
+
 var txt=" ";
 
 		var xhttp = new XMLHttpRequest();
@@ -7,7 +28,7 @@ var txt=" ";
         myFunction(this);
    		 }
 		};
-		xhttp.open("GET", "grupos.xml", true);
+		xhttp.open("GET", path+"grupos.xml", true);
 		xhttp.send();
 		function myFunction(xml) {
 
