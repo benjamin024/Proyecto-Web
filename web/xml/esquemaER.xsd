@@ -1,0 +1,16 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:element name="ejercicioResueltos">
+	<xs:complexType>
+			<xs:sequence>
+			<xs:element name="ejercicioResuelto">
+				<xs:complexType>
+						<xs:sequence>
+							<xs:element name="alumno" type="xs:string"/>
+							<xs:element name="pregunta" type="xs:string"/>
+			</xs:sequence>
+			</xs:complexType>
+			</xs:element>
+			</xs:sequence>
+			</xs:complexType>
+			</xs:element>
+</xs:schema>

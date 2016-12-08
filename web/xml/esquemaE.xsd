@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ejercicios">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ejercicio">
+					<xs:complexType>
+						<xs:sequence>
+							
+							<xs:element name="fecha" type="xs:string"/>
+							<xs:element name="instrucciones" type="xs:string"/>
+							<xs:element name="imagen" type="xs:string"/>
+							<xs:element name="pregunta" type="xs:string"/>
+							<xs:complexType>
+							<xs:sequence>
+								<xs:elemente name="respuesta">
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:string"/>
+						<xs:attribute name="texto" type="xs:string"/>
+						
+							</xs:complexType>
+						
+						</xs:sequence>
+						
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

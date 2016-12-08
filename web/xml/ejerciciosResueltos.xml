@@ -1,4 +1,5 @@
-<ejerciciosResueltos>
+<ejerciciosResueltos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="esquemaER.xsd">
 	<ejercicioResuelto IdEjercicio="1">
 		<alumno>Alumno01</alumno>
 		<pregunta ID="1">2</pregunta>
