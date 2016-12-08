@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="utilities/theme/css/style.css"><!-- Estilo del tema -->
   <link rel="stylesheet" href="utilities/mobirise/css/mbr-additional.css" type="text/css"> <!-- estilo del nav -->
   <script type="text/javascript" src="validacion.js"></script>
+  <script type="text/javascript" src="funciones.js"></script>
   <title>Ley de Ohm | Escuela Superior de Cómputo</title>  
   <script>
   var txt=" ";
@@ -18,7 +19,7 @@
         myFunction(this);
    		 }
 		};
-		xhttp.open("GET", "grupos.xml", true);
+		xhttp.open("GET", path+"grupos.xml", true);
 		xhttp.send();
 		function myFunction(xml) {
 

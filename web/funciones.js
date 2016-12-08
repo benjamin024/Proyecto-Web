@@ -12,7 +12,8 @@ function path(){
                 type:  'get',
                
                 success:  function (response) {
-                        path=response;
+                   
+                    path=response;
                 }
         });
        

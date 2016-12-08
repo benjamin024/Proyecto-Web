@@ -7,7 +7,15 @@
   <link rel="stylesheet" href="utilities/dropdown/css/style.css"> <!-- Aplica animaciones y estilos al hacer scroll -->
   <link rel="stylesheet" href="utilities/theme/css/style.css"><!-- Estilo del tema -->
   <link rel="stylesheet" href="utilities/mobirise/css/mbr-additional.css" type="text/css"> <!-- estilo del nav -->
-  <title>Ley de Ohm | Escuela Superior de Cómputo</title>  
+  <script src="utilities/jquery/jquery-3.1.1.js"></script>
+  <script src="utilities/bootstrap/js/bootstrap.min.js"></script>
+  <script src="utilities/dropdown/js/script.min.js"></script>
+  <script src="submit.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <title>Ley de Ohm | Escuela Superior de Cómputo</title> 
+  
+
 </head>
 <body>
 <section id="menu-0">
@@ -42,7 +50,7 @@
                 <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
                     <h1 class="mbr-section-title display-1">¡Inicia Sesión!</h1>
                     <p class="text-black">Introduce tu nombre de usuario y contraseña:</p>
-                    <form action="login" method="post" class="form-inline">
+                    <div class="form-inline" >
                         <div class="input-group">
                             <label for="user" class="text-black">Usuario:</label>
                             <input type="text" class="form-control" placeholder="Usuario" id="user" name="user" required/>
@@ -52,9 +60,9 @@
                             <input class="form-control" type="password" name="pass" id="pass" placeholder="Contraseña" required/>
                         </div>
                         <div class="input-group-sm">
-                            <br><input type="submit" value="Aceptar" class="btn btn-black btn-lg btn-black-outline"/>
+                            <br><button class="btn btn-black btn-lg btn-black-outline" id="submit">Aceptar</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,8 +74,6 @@
         <p class="text-xs-center" style="color: #FFFFFF;">Escuela superior de Cómputo<br>Tecnologías para la Web</p>
     </div>
 </footer>
-  <script src="utilities/jquery/jquery-3.1.1.js"></script>
-  <script src="utilities/bootstrap/js/bootstrap.min.js"></script>
-  <script src="utilities/dropdown/js/script.min.js"></script>
+ 
   </body>
 </html>

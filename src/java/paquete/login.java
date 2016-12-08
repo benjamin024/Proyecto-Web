@@ -54,15 +54,17 @@ public class login extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             rutaXML = request.getRealPath("/") + "xml";
             PrintWriter out=response.getWriter();
-            try {
+           System.out.println(" "+usuario+" "+pass);
+            try { 
                 boolean ok = usuarioEncontrado(usuario, pass);
+                System.out.println(ok);
                 if(ok){ //usuario y contraseña correctas
                     switch(tipoUsuario){
                         case 1:
                              HttpSession sesion = request.getSession();
                              sesion.setAttribute("nombre", nombre);
-                            out.println("Bienvenido " + usuario);
-                            response.sendRedirect("administrador");
+                            out.println("1");
+                            //response.sendRedirect("administrador");
                             break;
                         case 2:
                             sesion = request.getSession();
@@ -70,7 +72,9 @@ public class login extends HttpServlet {
                             sesion.setAttribute("user", usuario);
                             sesion.setAttribute("grupo", grupo);
                             sesion.setAttribute("tipo", tipoUsuario);
-                            response.sendRedirect("profesor");
+                            out.println("2");
+                           
+                            //response.sendRedirect("profesor");
                             break;
                         case 3:
                             if(activo == 1){
@@ -79,13 +83,16 @@ public class login extends HttpServlet {
                                 sesion.setAttribute("user", usuario);
                                 sesion.setAttribute("grupo", grupo);
                                 sesion.setAttribute("tipo", tipoUsuario);
-                                response.sendRedirect("alumno");
+                                out.println("3");
+                                //response.sendRedirect("alumno");
                             }else{
-                                out.println("Usuario Inactivo");
+                                out.println("4");
                             }
                     }
                 }else{
-                    out.println("<script>alert('Usuario o password incorrectos');</script>");
+                    
+                    out.println("5");
+                    
                 }
             } catch (Exception ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
