@@ -55,6 +55,7 @@ public class administrador extends HttpServlet {
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
              out.println("<ul  class='nav-dropdown collapse pull-xs-left nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+              out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAdmin' aria-expanded='false'  style='color: #FFFFFF;'>Modificar</a></li>");
              out.println("<li class='nav-item'><a class='nav-link link' href='formProfesor.html' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-pencil'></span>Registrar Profesor</a></li>");
              out.println("<li class='nav-item'><a class='nav-link link' href='eligeProfesor' aria-expanded='false'  style='color: #FFFFFF;'> <span class='glyphicon glyphicon-list-alt'></span>Ver Profesores</a></li>");
              out.println("<li class='nav-item'><a class='nav-link link' href='eligeAlumno' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-education'></span>Ver Grupos</a></li>");
@@ -77,7 +78,7 @@ public class administrador extends HttpServlet {
             out.println("<div class='container'>");
             out.println("<div class='row'>");
             out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
-            out.println("<h1 class='mbr-section-title display-1'>Bienvendid@ " + sesion.getAttribute("nombre") +"</h1>");
+            out.println("<h1 class='mbr-section-title display-1'>Bienvendid@ " + sesion.getAttribute("user") +"</h1>");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>");
