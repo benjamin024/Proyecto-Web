@@ -178,7 +178,7 @@ public class nuevoEjercicio extends HttpServlet {
         for(int i = 0; i < j; i++){
             pregunta[i] = new Element("pregunta");
             pregunta[i].setAttribute("ID",Integer.toString(i+1));
-            pregunta[i].setAttribute("text",preguntas[i]);
+            pregunta[i].setAttribute("texto",preguntas[i]);
             correcta[i] = new Element("respuesta");
             correcta[i].setAttribute("ID","1");
             correcta[i].setText(correctas[i]);

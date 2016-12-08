@@ -27,6 +27,19 @@ public class calificacionEjercicio extends HttpServlet {
     private String ruta;   
     private int correctas = 0;
     
+    private int getSolicitudes(String grupo) throws Exception{
+        int cont = 0;
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(ruta + "xml/usuarios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();  
+        for(Element hijo: hijosRaiz){  
+            if(hijo.getAttributeValue("tipo").equals("3") && hijo.getAttributeValue("activo").equals("0") && hijo.getChildText("grupo").equals(grupo))
+                cont++;
+        }
+        return cont;
+    }
+    
     private Element getEjercicio(String id, String grupo) throws Exception{
         SAXBuilder builder = new SAXBuilder(); 
         Document doc = builder.build(new FileInputStream(ruta + "xml\\ejercicios.xml"));
@@ -88,34 +101,58 @@ public class calificacionEjercicio extends HttpServlet {
             out.println("<div class='mbr-table'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
-            out.println("<a href='administrador' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-            out.println("<a class='navbar-caption text-white' href='administrador'>Escuela Superior de Cómputo</a>");
-            out.println("</div>");
-            out.println("</div>");
-            out.println("<div class='mbr-table-cell'>");
-            out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
-            out.println("<div class='hamburger-icon'></div>");
-            out.println("</button>");
-            out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='entrenar' aria-expanded='false'  style='color: #FFFFFF;'>¡A Entrenar!</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='misEjercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
-            ejercicios e = new ejercicios();
-            int sinResolver = 0;
-            try {
-               sinResolver = e.getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"), sesion.getAttribute("user").toString());
-            } catch (Exception ex) {
-                Logger.getLogger(alumno.class.getName()).log(Level.SEVERE, null, ex);
+            String user = "";
+            if(sesion.getAttribute("tipo").toString().equals("2")){
+                user = request.getParameter("alumno");
+                out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+                out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("<div class='mbr-table-cell'>");
+                out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
+                out.println("<div class='hamburger-icon'></div>");
+                out.println("</button>");
+                out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
+                try {
+                    out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
+                } catch (Exception ex) {
+                    Logger.getLogger(profesor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
+            }else{
+                user = sesion.getAttribute("user").toString();
+                out.println("<a href='alumno' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+                out.println("<a class='navbar-caption text-white' href='administrador'>Escuela Superior de Cómputo</a>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("<div class='mbr-table-cell'>");
+                out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
+                out.println("<div class='hamburger-icon'></div>");
+                out.println("</button>");
+                out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='entrenar' aria-expanded='false'  style='color: #FFFFFF;'>¡A Entrenar!</a></li>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='misEjercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
+                ejercicios e = new ejercicios();
+                int sinResolver = 0;
+                try {
+                   sinResolver = e.getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"),user);
+                } catch (Exception ex) {
+                    Logger.getLogger(alumno.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver ("+ sinResolver+")</a></li>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAlumno' aria-expanded='false'  style='color: #FFFFFF;'>Modifica tus Datos</a></li>");
+                out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
             }
-            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver ("+ sinResolver+")</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAlumno' aria-expanded='false'  style='color: #FFFFFF;'>Modifica tus Datos</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
             out.println("</ul>");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' >");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo2.jpg);' >");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
@@ -129,19 +166,19 @@ public class calificacionEjercicio extends HttpServlet {
             }
             out.println("<h1 class='mbr-section-title display-1'>Resultados del Ejercicio</h1>");
             out.println("<center><div style='width: 40%; height: 30%;'><img src='imagenesEjercicios/" + ejercicio.getChildText("imagen") + "' width=100% height=100% /></div></center><br/>");
-            out.println("<table class='table'>");
-            out.println("<thead><tr><th>Pregunta</th><th>Respuesta Seleccionada</th><th>Respuesta Correcta</th><th></th></tr></thead>");
+            out.println("<table class='table table-bordered table-hover'>");
+            out.println("<thead><tr><th>Pregunta</th><th>Respuesta Seleccionada</th><th>Respuesta Correcta</th></tr></thead>");
             out.println("<tbody>");
             int numPreguntas = getNumPreguntas(ejercicio);
             for(int i = 1; i <= numPreguntas;  i++){
                 try {
-                    if(esCorrecta(id, sesion.getAttribute("grupo").toString(),sesion.getAttribute("user").toString(), i)){
+                    if(esCorrecta(id, sesion.getAttribute("grupo").toString(),user, i)){
                         Element pregunta = getPregunta(ejercicio, i);
                         Element respuesta = getRespuesta(pregunta, 1);
                         out.println("<tr style='color: #0B610B;'><td>" + pregunta.getAttributeValue("texto") + "</td><td colspan=2 >" + respuesta.getText() +"</td></tr>");
                     }else{
                         Element pregunta = getPregunta(ejercicio, i);
-                        Element respuesta = getRespuesta(pregunta, getSeleccionada(id, sesion.getAttribute("grupo").toString(),sesion.getAttribute("user").toString(), i));
+                        Element respuesta = getRespuesta(pregunta, getSeleccionada(id, sesion.getAttribute("grupo").toString(),user, i));
                         Element correcta = getRespuesta(pregunta,1);
                         out.println("<tr style='color: #FF0000;'><td>" + pregunta.getAttributeValue("texto") + "</td><td>" + respuesta.getText() +"</td><td>"+correcta.getText()+"</td></tr>");
                     }
@@ -150,14 +187,17 @@ public class calificacionEjercicio extends HttpServlet {
                 }
             }
             try {
-                out.println("<tr><td colspan=2> Calificación: </td><td>" + getCalificacion(numPreguntas, id, sesion.getAttribute("user").toString(), sesion.getAttribute("grupo").toString()) + "</td></tr>");
+                out.println("<tr><td colspan=2> Calificación: </td><td>" + getCalificacion(numPreguntas, id, user, sesion.getAttribute("grupo").toString()) + "</td></tr>");
             } catch (Exception ex) {
                 Logger.getLogger(calificacionEjercicio.class.getName()).log(Level.SEVERE, null, ex);
             }
             correctas = 0;
             out.println("</tbody>");
             out.println("</table>");
-            out.println("<a href=misEjercicios ><input type=button value='Aceptar' class='btn btn-lg btn-black-outline btn-black'></a>");
+            if(sesion.getAttribute("tipo").toString().equals("2"))
+                out.println("<a href=infoEjercicio?id="+id+" ><input type=button value='Aceptar' class='btn btn-lg btn-black-outline btn-black'></a>");
+            else
+                out.println("<a href=misEjercicios ><input type=button value='Aceptar' class='btn btn-lg btn-black-outline btn-black'></a>");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>");

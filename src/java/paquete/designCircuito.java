@@ -81,7 +81,7 @@ public class designCircuito extends HttpServlet {
         out.println("</div>");
         out.println("</nav>");
         out.println("</section>");
-        out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
+        out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo2.jpg);'>");
         out.println("<div class='mbr-table-cell'>");
         out.println("<div class='container'>");
         out.println("<div class='row'>");

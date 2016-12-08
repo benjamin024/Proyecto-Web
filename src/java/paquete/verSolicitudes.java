@@ -98,7 +98,7 @@ public class verSolicitudes extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo2.jpg);'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
@@ -110,14 +110,14 @@ public class verSolicitudes extends HttpServlet {
                     out.println("<h2>Solicitudes para inscribirse al grupo</h2>");
                     String[][] solicitudes = getSolicitudes(sesion.getAttribute("grupo").toString());
                     out.println("<table class='table table-bordered table-hover'>");
-                    out.println("<thead><tr><th>Usuario</th><th>Nombre Completo</th><th>Correo Electrónico</th><th></th></tr></thead>");
+                    out.println("<thead><tr><th>Usuario</th><th>Nombre Completo</th><th>Correo Electrónico</th><th>Aceptar</th></tr></thead>");
                     out.println("<tbody>");
                     for(int i = 0; i < solicitudes.length; i++){
                         out.println("<tr>");
                         out.println("<td>" + solicitudes[i][0] + "</td>");
                         out.println("<td>" + solicitudes[i][1] + "</td>");
                         out.println("<td>" + solicitudes[i][2] + "</td>");
-                        out.println("<td><a href='cambiaEstado?user="+solicitudes[i][0]+"'>Aceptar</a></td>");
+                        out.println("<td><a href='cambiaEstado?user="+solicitudes[i][0]+"'><img src=utilities/images/aceptar.png width=35px height=35px ></a></td>");
                         out.println("</tr>");
                     }
                     out.println("</tbody>");

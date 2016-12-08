@@ -90,7 +90,7 @@ public class formResuelveEjercicio extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo2.jpg);'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
@@ -108,7 +108,12 @@ public class formResuelveEjercicio extends HttpServlet {
                 int[] orden = getOrdenRespuestas();
                 for(int j = 0; j < 3; j++){
                     Element respuesta = getRespuesta(pregunta, orden[j]);
-                    out.println("<input type=radio name=pregunta"+pregunta.getAttributeValue("ID")+" value="+respuesta.getAttributeValue("ID")+">" + respuesta.getText() + "<br>");
+                    String selected = "";
+                    if(j == 0)
+                       selected = "checked";
+                    else
+                        selected = "";
+                    out.println("<input type=radio name=pregunta"+pregunta.getAttributeValue("ID")+" value="+respuesta.getAttributeValue("ID")+" " + selected +">" + respuesta.getText() + "<br>");
                 }
                 out.println("<br>");
                 out.println("</li>");

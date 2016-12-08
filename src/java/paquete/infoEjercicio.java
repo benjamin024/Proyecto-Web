@@ -99,7 +99,7 @@ public class infoEjercicio extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo2.jpg);'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
@@ -119,12 +119,12 @@ public class infoEjercicio extends HttpServlet {
                 Logger.getLogger(infoEjercicio.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(resueltos.size() > 0){
-                out.println("<table class='table' >");
+                out.println("<table class='table table-bordered table-hover'>");
                 out.println("<thead><th>Alumno</th><th>Calificación</th>");
                 out.println("<tbody>");
                 for(Element r : resueltos){
                     try {
-                        out.println("<tr><td>" + getAlumno(r.getChildText("alumno")) + "</td><td>" + r.getChildText("calificacion") + "</td></tr>");
+                        out.println("<tr><td><a href=calificacionEjercicio?id="+id+"&alumno="+r.getChildText("alumno")+" >" + getAlumno(r.getChildText("alumno")) + "</td></a><td>" + r.getChildText("calificacion") + "</td></tr>");
                     } catch (Exception ex) {
                         Logger.getLogger(infoEjercicio.class.getName()).log(Level.SEVERE, null, ex);
                     }

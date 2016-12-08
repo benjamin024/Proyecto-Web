@@ -82,7 +82,7 @@ public class formEjercicio extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo2.jpg);'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
@@ -91,7 +91,7 @@ public class formEjercicio extends HttpServlet {
             out.println("<form action='nuevoEjercicio' method='post' enctype='multipart/form-data'>");
             out.println("Sube la imagen del circuito:<br>");
             out.println("<input class='btn btn-default btn-file' type='file' id='files' name='files[]' required/><br>");
-            out.println("Si no tienes la imagen aún, puedes <a href='circuito'>Diseñar un circuito</a><br><br>");
+            out.println("Si no tienes la imagen aún, puedes <a href='designCircuito'>Diseñar un circuito</a><br><br>");
             out.println("<output id='list'></output><br><br>");
             out.println("Instrucciones: <input type='text' name='instru' class=form-control required/><br>");
             out.println("<table class='table'>");
