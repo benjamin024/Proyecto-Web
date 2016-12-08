@@ -19,7 +19,7 @@ import org.jdom.output.XMLOutputter;
 import java.util.Properties;
 import javax.servlet.http.HttpSession;
 
-public class ModificarAlumno extends HttpServlet {
+public class ModificarAdmin extends HttpServlet {
     
     private String rutaXML;
     
@@ -66,7 +66,7 @@ public class ModificarAlumno extends HttpServlet {
         try {
             datos=obtenDatos(user);
         } catch (Exception ex) {
-            Logger.getLogger(ModificarAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModificarAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
             rutaXML = request.getRealPath("/") + "xml";
             //response.sendRedirect("eligeAlumno");
@@ -75,6 +75,7 @@ public class ModificarAlumno extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset='UTF-8'>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"><!--Para poder usar iconos-->");
             out.println("<link rel='shortcut icon' href='utilities/images/logoescom-182x128-95.png' type='image/x-icon'>");
             out.println("<link rel='stylesheet' href='utilities/bootstrap/css/bootstrap.min.css'> <!-- Ayuda al diseño responsivo -->");
             out.println("<link rel='stylesheet' href='utilities/dropdown/css/style.css'> <!-- Aplica animaciones y estilos al hacer scroll -->");
@@ -97,9 +98,18 @@ public class ModificarAlumno extends HttpServlet {
             out.println("<button class='navbar-toggler pull-xs-right hidden-md-up' type='button' data-toggle='collapse' data-target='#exCollapsingNavbar'>");
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
+             out.println("<ul  class='nav-dropdown collapse pull-xs-left nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAdmin' aria-expanded='false'  style='color: #FFFFFF;'>Modificar</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='formProfesor.html' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-pencil'></span>Registrar Profesor</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='eligeProfesor' aria-expanded='false'  style='color: #FFFFFF;'> <span class='glyphicon glyphicon-list-alt'></span>Ver Profesores</a></li>");
+             out.println("<li class='nav-item'><a class='nav-link link' href='eligeAlumno' aria-expanded='false'  style='color: #FFFFFF;'><span class='glyphicon glyphicon-education'></span>Ver Grupos</a></li>");
+            out.println("</ul>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAlumno' aria-expanded='false'  style='color: #FFFFFF;'>Modifica tus Datos</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver</a></li>");
+            try {
+                out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'></li>");
+            } catch (Exception ex) {
+                Logger.getLogger(profesor.class.getName()).log(Level.SEVERE, null, ex);
+            }
             out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
             out.println("</ul>");
             out.println("</div>");
