@@ -66,6 +66,7 @@ public class profesor extends HttpServlet {
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='ModificaProfesor' aria-expanded='false'  style='color: #FFFFFF;'>Modificar</a></li>");
             out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
             out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
             out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
