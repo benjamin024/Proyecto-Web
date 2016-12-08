@@ -367,6 +367,24 @@ function saveCanvas(){
 	dataUrl=dataUrl.replace("image/png",'image/octet-stream'); // sustituimos el tipo por octet
 	document.location.href =dataUrl;
 }
+function exportCanvasAsPNG(fileName) {
+alert("hola");
+    //var canvasElement = document.getElementById("circarea");
+    
+    var MIME_TYPE = "image/png";
+
+    var imgURL = canvas.toDataURL(MIME_TYPE);
+
+    var dlLink = document.createElement('a');
+    dlLink.download = fileName;
+    dlLink.href = imgURL;
+    dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+
+    document.body.appendChild(dlLink);
+    dlLink.click();
+    document.body.removeChild(dlLink);
+}
+
 
 function setCanvasDimensions(w, h) {
   document.getElementById('leadoutput').style.left = (w - 310) + 'px';

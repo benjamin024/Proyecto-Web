@@ -69,6 +69,7 @@ public class registraAlumno extends HttpServlet {
                 boolean ok = registroAlumno(nombre, grupo, user, mail, pass);
                 if(ok){
                     out.println("Usuario registrado");
+                    response.sendRedirect("confirmacionA.html");
                 }else{
                     out.println("ERROR");
                 }
