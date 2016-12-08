@@ -27,7 +27,7 @@ public class ModificarAlumno extends HttpServlet {
     
      private String[] obtenDatos(String user) throws Exception{
          
-         String[ ] datos = new String[3];
+         String[ ] datos = new String[4];
          
          
         SAXBuilder builder = new SAXBuilder(); 
@@ -39,6 +39,7 @@ public class ModificarAlumno extends HttpServlet {
                 datos[0]=hijo.getChildText("nombre");
                 datos[1]=hijo.getChildText("grupo");
                 datos[2]=hijo.getChildText("email");
+                datos[3]=hijo.getChildText("password");
                 
                 
             }
@@ -60,7 +61,7 @@ public class ModificarAlumno extends HttpServlet {
             
             
             
-            String[ ] datos = new String[3];
+            String[ ] datos = new String[4];
         try {
             datos=obtenDatos(user);
         } catch (Exception ex) {
@@ -120,7 +121,7 @@ public class ModificarAlumno extends HttpServlet {
               out.println("   <div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
                    out.println("  <h1 class='mbr-section-title display-1'>¡Actualiza los datos!</h1>");
                     out.println(" <p class='text-black'>Modifica los campos que sean necesarios:</p>");
-                    out.println(" <form action='actualizarAlumno' method='post' class='form'>");
+                    out.println(" <form action='ActualizaAlumno' method='post' class='form'>");
                        out.println("  <div class='col-md-8'>");
                             out.println(" <label for='nombre' class='text-black'>Nombre Completo:</label>");
                            out.println("  <input type='text' class='form-control' placeholder='Nombre Completo' id='nombre' name='nombre' value='"+datos[0]+"' required/>");
@@ -131,12 +132,25 @@ public class ModificarAlumno extends HttpServlet {
                        out.println("  </div>");
                         out.println(" <div class='col-md-6'>");
                             out.println(" <label for='user' class='text-black'>Número de Boleta:</label>");
-                            out.println(" <input type='text' class='form-control' placeholder='Número de Boleta' id='user' name='user' value='"+user+"' required/>");
+                            out.println(" <input type='text' class='form-control' placeholder='Número de Boleta' id='user' name='user' value='"+user+"' readonly required/>");
                        out.println("  </div>");
                        out.println("  <div class='col-md-offset-6'>");
                             out.println("<label for='mail' class='text-black'>Correo Electrónico:</label>");
                            out.println("  <input class='form-control' type='mail' name='mail' id='mail' placeholder='Correo Electrónico' value='"+datos[2]+"' required/>");
                         out.println(" </div>");
+                        
+                        out.println(" <div class='col-md-6'>");
+                            out.println(" <label for='pass' class='text-black'>Contraseña:</label>");
+                            out.println(" <input type='text' class='form-control' placeholder='Contraseña' id='pass' name='pass' value='"+datos[3]+"' onchange=\"form.passw.pattern = this.value;\" required/>");
+                       out.println("  </div>");
+                       out.println(" <div class='col-md-offset-6'>");
+                            out.println(" <label for='passw' class='text-black'>Confirma Contraseña:</label>");
+                            out.println(" <input type='text' class='form-control' placeholder='Número de Boleta' id='passw' name='passw' value='"+datos[3]+"'  title=\"Contraseñas deben de coincidir\" required/>");
+                       out.println("  </div>");
+                        
+                        
+                        
+                        
                        out.println("  <div class='input-group-sm'>");
                             out.println(" <br><input type='submit' value='Actualizar' class='btn btn-black btn-lg btn-black-outline'/>");
                        out.println(" </div></form></div></div></div></div></section>");
