@@ -47,6 +47,7 @@ public class designCircuito extends HttpServlet {
         out.println("<link rel='stylesheet' href='utilities/theme/css/style.css'><!-- Estilo del tema -->");
         out.println("<link rel='stylesheet' href='utilities/mobirise/css/mbr-additional.css' type='text/css'> <!-- estilo del nav -->");
         out.println("<link rel='stylesheet' href='utilities/archivos/archivos.css' type='text/css'>");
+        out.println("<script src='utilities/archivos/archivos.js'></script>");
         out.println("<title>Ley de Ohm | Escuela Superior de Cómputo</title>  ");
         out.println("</head>");
         out.println("<body>");
@@ -86,6 +87,7 @@ public class designCircuito extends HttpServlet {
         out.println("<div class='row'>");
         out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
         out.println("<h5 class='mbr-section-title'>Diseña el circuito</h5>");
+        out.println("<a href=# onclick='instrucciones();' ><h6> Ver las instrucciones </h6> </a>");
         out.println("<iframe src=sim.html height=600 width=950 style='border: none;'></iframe>");
         out.println("</div>");
         out.println("</div>");

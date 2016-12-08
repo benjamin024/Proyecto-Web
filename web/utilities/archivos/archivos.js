@@ -43,3 +43,13 @@ function eliminaPregunta(){
   if(cont == 1)
     document.getElementById("menos").style.display = "none";
 }
+
+function instrucciones(){
+	var i = "Para diseñar tu circuito correctamente sigue las siguientes instrucciones:\n\bPara agregar un componente arrastra el dibujo correspondiente de la parte izquierda al lienzo\n\bPara cambiar el valor de un componente, da clic en él, y escribe el nuevo valor\n\bPara eliminar un componente da clic en él y presiona la tecla Suprimir\nUna vez terminado tu diseño da clic en el botón Aceptar para descargar tu imagen";
+	alert(i);
+}
+
+function instruccionesA(){
+	var i = "Para practicar con un circuito sigue las siguientes instrucciones:\n\bPara agregar un componente arrastra el dibujo correspondiente de la parte izquierda al lienzo\n\bPara cambiar el valor de un componente, da clic en él, y escribe el nuevo valor\n\bPara eliminar un componente da clic en él y presiona la tecla Suprimir\n\bSi deseas obtener valores de voltaje, arrastra las puntas roja y negra a los puntos donde deseas medir";
+	alert(i);
+}

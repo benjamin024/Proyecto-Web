@@ -1,8 +1,11 @@
+
 package paquete;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +18,28 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-public class formResuelveEjercicio extends HttpServlet {
-    private String ruta;
+
+public class infoEjercicio extends HttpServlet {
+
+    private String rutaXML;
+    private List<Element> resueltos = new ArrayList<Element>();
+    
+    private int getSolicitudes(String grupo) throws Exception{
+        int cont = 0;
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(rutaXML + "/usuarios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();  
+        for(Element hijo: hijosRaiz){  
+            if(hijo.getAttributeValue("tipo").equals("3") && hijo.getAttributeValue("activo").equals("0") && hijo.getChildText("grupo").equals(grupo))
+                cont++;
+        }
+        return cont;
+    }
     
     private Element getEjercicio(String id, String grupo) throws Exception{
         SAXBuilder builder = new SAXBuilder(); 
-        Document doc = builder.build(new FileInputStream(ruta + "xml\\ejercicios.xml"));
+        Document doc = builder.build(new FileInputStream(rutaXML + "/ejercicios.xml"));
         Element raiz = doc.getRootElement();  
         List<Element> hijosRaiz = raiz.getChildren();
          for (Element ejercicio : hijosRaiz){
@@ -30,21 +49,14 @@ public class formResuelveEjercicio extends HttpServlet {
          }
         return new Element("ejercicio");
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             HttpSession sesion = request.getSession();
             PrintWriter out = response.getWriter();
-            String id = request.getParameter("id");
-            ruta = request.getRealPath("/");
-            Element ejercicio = null;
-            try {
-                ejercicio = getEjercicio(id, sesion.getAttribute("grupo").toString());
-            } catch (Exception ex) {
-                Logger.getLogger(formResuelveEjercicio.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            rutaXML = request.getRealPath("/") + "xml";
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -63,8 +75,8 @@ public class formResuelveEjercicio extends HttpServlet {
             out.println("<div class='mbr-table'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='navbar-brand'>");
-            out.println("<a href='administrador' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
-            out.println("<a class='navbar-caption text-white' href='administrador'>Escuela Superior de Cómputo</a>");
+            out.println("<a href='profesor' class='navbar-logo'><img src='utilities/images/logoescom-182x128-95.png'></a>");
+            out.println("<a class='navbar-caption text-white' href='profesor'>Escuela Superior de Cómputo</a>");
             out.println("</div>");
             out.println("</div>");
             out.println("<div class='mbr-table-cell'>");
@@ -72,17 +84,14 @@ public class formResuelveEjercicio extends HttpServlet {
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='entrenar' aria-expanded='false'  style='color: #FFFFFF;'>¡A Entrenar!</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='misEjercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
-            ejercicios e = new ejercicios();
-            int sinResolver = 0;
+            out.println("<li class='nav-item'><a class='nav-link link' href='designCircuito' aria-expanded='false'  style='color: #FFFFFF;'>Diseñar Circuito</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='formEjercicio' aria-expanded='false'  style='color: #FFFFFF;'>Nuevo Ejercicio</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
             try {
-               sinResolver = e.getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"), sesion.getAttribute("user").toString());
+                out.println("<li class='nav-item'><a class='nav-link link' href='verSolicitudes' aria-expanded='false'  style='color: #FFFFFF;'>Solicitudes del grupo ("+getSolicitudes(sesion.getAttribute("grupo").toString())+")</a></li>");
             } catch (Exception ex) {
-                Logger.getLogger(alumno.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(profesor.class.getName()).log(Level.SEVERE, null, ex);
             }
-            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver ("+ sinResolver+")</a></li>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAlumno' aria-expanded='false'  style='color: #FFFFFF;'>Modifica tus Datos</a></li>");
             out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
             out.println("</ul>");
             out.println("</div>");
@@ -90,34 +99,44 @@ public class formResuelveEjercicio extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
             out.println("<div class='mbr-section col-md-10 col-md-offset-1 text-xs-center'>");
-            out.println("<h1 class='mbr-section-title display-1'>Resolver Ejercicio</h1>");
-            out.println("<center><div style='width: 40%; height: 30%;'><img src='imagenesEjercicios/" + ejercicio.getChildText("imagen") + "' width=100% height=100% /></div></center><br/>");
-            out.println("<div align='left'>");
-            out.println("<h6>" + ejercicio.getChildText("instrucciones") + "</h6><br>");
-            out.println("<form action=resuelveEjercicio method=post >");
-            out.println("<ol>");
-            int numPreguntas = getNumPreguntas(ejercicio);
-            for(int i = 1; i <= numPreguntas;  i++){
-                Element pregunta = getPregunta(ejercicio, i);
-                out.println("<li>" + pregunta.getAttributeValue("texto") + "<br>");
-                int[] orden = getOrdenRespuestas();
-                for(int j = 0; j < 3; j++){
-                    Element respuesta = getRespuesta(pregunta, orden[j]);
-                    out.println("<input type=radio name=pregunta"+pregunta.getAttributeValue("ID")+" value="+respuesta.getAttributeValue("ID")+">" + respuesta.getText() + "<br>");
-                }
-                out.println("<br>");
-                out.println("</li>");
+            out.println("<h1 class='mbr-section-title display-1'>Información del ejercicio</h1>");
+            String id = request.getParameter("id");
+            Element ejercicio = new Element("ejercicio");
+            try {
+                ejercicio = getEjercicio(id, sesion.getAttribute("grupo").toString());
+            } catch (Exception ex) {
+                Logger.getLogger(infoEjercicio.class.getName()).log(Level.SEVERE, null, ex);
             }
-            out.println("<ol></div>");
-            out.println("<input type=hidden value=" + id + " name=id />");
-            out.println("<input type=hidden value=" + numPreguntas + " name=numPreguntas />");
-            out.println("<input type=submit value='Aceptar' class='btn btn-lg btn-black-outline btn-black'>");
-            out.println("</form>");
+            out.println("<center><div style='width: 40%; height: 30%;'><img src='imagenesEjercicios/" + ejercicio.getChildText("imagen") + "' width=100% height=100% /></div></center><br/>");
+            try {
+                getResueltos(id, sesion.getAttribute("grupo").toString());
+            } catch (Exception ex) {
+                Logger.getLogger(infoEjercicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(resueltos.size() > 0){
+                out.println("<table class='table' >");
+                out.println("<thead><th>Alumno</th><th>Calificación</th>");
+                out.println("<tbody>");
+                for(Element r : resueltos){
+                    try {
+                        out.println("<tr><td>" + getAlumno(r.getChildText("alumno")) + "</td><td>" + r.getChildText("calificacion") + "</td></tr>");
+                    } catch (Exception ex) {
+                        Logger.getLogger(infoEjercicio.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                resueltos.clear();
+                out.println("</tbody>");
+                out.println("</table>");
+                out.println("<a href=ejercicios ><input type=button value='Aceptar' class='btn btn-lg btn-black-outline btn-black'></a>");
+            }else{
+                out.println("<h6>Ningún alumno ha respondido el ejercicio</h6>");
+                out.println("<h6><a href=modificarEjercicio?id=" + id + ">Aún puedes hacer cambios en el ejercicio</a></h6>");
+            }
             out.println("</div>");
             out.println("</div>");
             out.println("</div>");
@@ -135,65 +154,27 @@ public class formResuelveEjercicio extends HttpServlet {
             out.println("</html>");
     }
 
-    private int getNumPreguntas(Element ejercicio) {
-        List hijos = ejercicio.getChildren();
-        return hijos.size() - 3;
+    private void getResueltos(String id, String grupo) throws Exception{
+        SAXBuilder builder = new SAXBuilder();
+        File xmlFile = new File(rutaXML + "/ejerciciosResueltos.xml");
+        Document document = (Document) builder.build(xmlFile);
+        Element rootNode = document.getRootElement();
+        List<Element> hijos = rootNode.getChildren();
+        for(Element hijo : hijos){
+            if(hijo.getChildText("grupo").equals(grupo) && hijo.getAttributeValue("IdEjercicio").equals(id))
+                resueltos.add(hijo);
+        }
     }
 
-    private Element getPregunta(Element ejercicio, int i) {
-        List<Element> hijos = ejercicio.getChildren("pregunta");
-        for(Element hijo: hijos){
-            if(hijo.getAttributeValue("ID").equals(i+""))
-                return hijo;
-        }
-        return new Element("pregunta");
-    }
-
-    private int[] getOrdenRespuestas(){
-        int random = (int) (Math.random()*6+1);
-        int[] orden = new int[3];
-        switch(random){
-            case 1:
-                orden[0] = 1;
-                orden[1] = 2;
-                orden[2] = 3;
-                break;
-            case 2:
-                orden[0] = 3;
-                orden[1] = 1;
-                orden[2] = 2;
-                break;
-            case 3:
-                orden[0] = 2;
-                orden[1] = 3;
-                orden[2] = 1;
-                break;
-            case 4:
-                orden[0] = 3;
-                orden[1] = 2;
-                orden[2] = 1;
-                break;
-            case 5:
-                orden[0] = 2;
-                orden[1] = 1;
-                orden[2] = 3;
-                break;
-            case 6:
-                orden[0] = 1;
-                orden[1] = 3;
-                orden[2] = 2;
-                break;
-        }
-        return orden;
-    }
-    
-    
-    private Element getRespuesta(Element pregunta, int i){
-        List<Element> hijos = pregunta.getChildren("respuesta");
-        for(Element hijo: hijos){
-            if(hijo.getAttributeValue("ID").equals(i+""))
-                return hijo;
-        }
-        return new Element("respuesta");
+    private String getAlumno(String user) throws Exception{
+        SAXBuilder builder = new SAXBuilder(); 
+        Document doc = builder.build(new FileInputStream(rutaXML + "/usuarios.xml"));
+        Element raiz = doc.getRootElement();  
+        List<Element> hijosRaiz = raiz.getChildren();  
+        for(Element hijo: hijosRaiz){
+            if(hijo.getAttributeValue("id").equals(user))
+                return hijo.getChildText("nombre");
+        } 
+        return "";
     }
 }

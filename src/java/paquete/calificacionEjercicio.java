@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package paquete;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 
 /**
  *
@@ -27,6 +25,7 @@ import org.jdom.input.SAXBuilder;
  */
 public class calificacionEjercicio extends HttpServlet {
     private String ruta;   
+    private int correctas = 0;
     
     private Element getEjercicio(String id, String grupo) throws Exception{
         SAXBuilder builder = new SAXBuilder(); 
@@ -98,7 +97,17 @@ public class calificacionEjercicio extends HttpServlet {
             out.println("<div class='hamburger-icon'></div>");
             out.println("</button>");
             out.println("<ul class='nav-dropdown collapse pull-xs-right nav navbar-toggleable-sm' id='exCollapsingNavbar'>");
-            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='entrenar' aria-expanded='false'  style='color: #FFFFFF;'>¡A Entrenar!</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='misEjercicios' aria-expanded='false'  style='color: #FFFFFF;'>Mis Ejercicios</a></li>");
+            ejercicios e = new ejercicios();
+            int sinResolver = 0;
+            try {
+               sinResolver = e.getEjercicios(sesion.getAttribute("grupo").toString(), request.getRealPath("/"), sesion.getAttribute("user").toString());
+            } catch (Exception ex) {
+                Logger.getLogger(alumno.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            out.println("<li class='nav-item'><a class='nav-link link' href='ejercicios' aria-expanded='false'  style='color: #FFFFFF;'>Ejercicios sin Resolver ("+ sinResolver+")</a></li>");
+            out.println("<li class='nav-item'><a class='nav-link link' href='ModificarAlumno' aria-expanded='false'  style='color: #FFFFFF;'>Modifica tus Datos</a></li>");
             out.println("<li class='nav-item'><a class='nav-link link' href='logout' aria-expanded='false'  style='color: #FFFFFF;'>Cerrar Sesión</a></li>");
             out.println("</ul>");
             out.println("</div>");
@@ -106,7 +115,7 @@ public class calificacionEjercicio extends HttpServlet {
             out.println("</div>");
             out.println("</nav>");
             out.println("</section>");
-            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' style='background-image: url(utilities/images/fondo.png);'>");
+            out.println("<section class='mbr-section mbr-section-hero mbr-section-full mbr-parallax-background' id='header1-1' >");
             out.println("<div class='mbr-table-cell'>");
             out.println("<div class='container'>");
             out.println("<div class='row'>");
@@ -120,7 +129,7 @@ public class calificacionEjercicio extends HttpServlet {
             }
             out.println("<h1 class='mbr-section-title display-1'>Resultados del Ejercicio</h1>");
             out.println("<center><div style='width: 40%; height: 30%;'><img src='imagenesEjercicios/" + ejercicio.getChildText("imagen") + "' width=100% height=100% /></div></center><br/>");
-            out.println("<table class='table>");
+            out.println("<table class='table'>");
             out.println("<thead><tr><th>Pregunta</th><th>Respuesta Seleccionada</th><th>Respuesta Correcta</th><th></th></tr></thead>");
             out.println("<tbody>");
             int numPreguntas = getNumPreguntas(ejercicio);
@@ -129,19 +138,26 @@ public class calificacionEjercicio extends HttpServlet {
                     if(esCorrecta(id, sesion.getAttribute("grupo").toString(),sesion.getAttribute("user").toString(), i)){
                         Element pregunta = getPregunta(ejercicio, i);
                         Element respuesta = getRespuesta(pregunta, 1);
-                        out.println("<tr style='color: #00FF00;'><td>" + pregunta.getAttributeValue("texto") + "</td><td rowspan=2 >" + respuesta.getText() +"</td></tr>");
+                        out.println("<tr style='color: #0B610B;'><td>" + pregunta.getAttributeValue("texto") + "</td><td colspan=2 >" + respuesta.getText() +"</td></tr>");
                     }else{
                         Element pregunta = getPregunta(ejercicio, i);
                         Element respuesta = getRespuesta(pregunta, getSeleccionada(id, sesion.getAttribute("grupo").toString(),sesion.getAttribute("user").toString(), i));
-                        Element correcta = getRespuesta(ejercicio,1);
+                        Element correcta = getRespuesta(pregunta,1);
                         out.println("<tr style='color: #FF0000;'><td>" + pregunta.getAttributeValue("texto") + "</td><td>" + respuesta.getText() +"</td><td>"+correcta.getText()+"</td></tr>");
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(calificacionEjercicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            try {
+                out.println("<tr><td colspan=2> Calificación: </td><td>" + getCalificacion(numPreguntas, id, sesion.getAttribute("user").toString(), sesion.getAttribute("grupo").toString()) + "</td></tr>");
+            } catch (Exception ex) {
+                Logger.getLogger(calificacionEjercicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            correctas = 0;
             out.println("</tbody>");
             out.println("</table>");
+            out.println("<a href=misEjercicios ><input type=button value='Aceptar' class='btn btn-lg btn-black-outline btn-black'></a>");
             out.println("</div>");
             out.println("</div>");
             out.println("</div>");
@@ -169,8 +185,9 @@ public class calificacionEjercicio extends HttpServlet {
             if(hijo.getAttributeValue("IdEjercicio").equals(ejercicio) && hijo.getChildText("alumno").equals(alumno) && hijo.getChildText("grupo").equals(grupo)){
                 List<Element> preguntas = hijo.getChildren("pregunta");
                 for(Element p : preguntas){
-                    if(p.getAttributeValue("ID").equals(pregunta))
+                    if(p.getAttributeValue("ID").equals(pregunta + "")){
                         return Integer.parseInt(p.getText());
+                    }
                 }
             }
         }
@@ -187,12 +204,38 @@ public class calificacionEjercicio extends HttpServlet {
             if(hijo.getAttributeValue("IdEjercicio").equals(ejercicio) && hijo.getChildText("alumno").equals(alumno) && hijo.getChildText("grupo").equals(grupo)){
                 List<Element> preguntas = hijo.getChildren("pregunta");
                 for(Element p : preguntas){
-                    if(p.getAttributeValue("ID").equals(pregunta) && p.getText().equals("1"))
+                    if(p.getAttributeValue("ID").equals(pregunta+"") && p.getText().equals("1")){
+                        correctas++;
                         return true;
+                    }
                 }
             }
         }
         return false;
     }
-
+    
+    private int getCalificacion(int numPreguntas, String ejercicio, String alumno, String grupo) throws Exception{
+        int calificacion = (correctas * 10) / numPreguntas;
+        SAXBuilder builder = new SAXBuilder();
+        File xmlFile = new File(ruta + "xml\\ejerciciosResueltos.xml");
+        Document document = (Document) builder.build(xmlFile);
+        Element rootNode = document.getRootElement();
+        List<Element> hijos = rootNode.getChildren();
+        for(Element hijo : hijos){
+            if(hijo.getAttributeValue("IdEjercicio").equals(ejercicio) && hijo.getChildText("alumno").equals(alumno) && hijo.getChildText("grupo").equals(grupo)){
+                Element calificacionE = new Element("calificacion");
+                calificacionE.setText(calificacion + "");
+                if(hijo.getChildText("calificacion") == null)
+                    hijo.addContent(calificacionE);
+            }
+        }
+        XMLOutputter xmlout = new XMLOutputter();
+        xmlout.setFormat(Format.getPrettyFormat());
+        try (FileOutputStream fileout = new FileOutputStream(ruta + "xml\\ejerciciosResueltos.xml")) {
+            xmlout.output(document, fileout);
+            fileout.flush();
+            fileout.close();
+        }
+        return calificacion;
+    }
 }
