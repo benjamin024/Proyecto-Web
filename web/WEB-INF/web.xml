@@ -97,16 +97,28 @@
         <servlet-class>paquete.path</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>misEjercicios</servlet-name>
-        <servlet-class>paquete.misEjercicios</servlet-class>
+        <servlet-name>ModificarAlumno</servlet-name>
+        <servlet-class>paquete.ModificarAlumno</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>entrenar</servlet-name>
-        <servlet-class>paquete.entrenar</servlet-class>
+        <servlet-name>ActualizaAlumno</servlet-name>
+        <servlet-class>paquete.ActualizaAlumno</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>infoEjercicio</servlet-name>
-        <servlet-class>paquete.infoEjercicio</servlet-class>
+        <servlet-name>ModificaProfesor</servlet-name>
+        <servlet-class>paquete.ModificaProfesor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>actualizaProfesor</servlet-name>
+        <servlet-class>paquete.actualizaProfesor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModificarAdmin</servlet-name>
+        <servlet-class>paquete.ModificarAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>actualizaAdmin</servlet-name>
+        <servlet-class>paquete.actualizaAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -205,16 +217,28 @@
         <url-pattern>/path</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>misEjercicios</servlet-name>
-        <url-pattern>/misEjercicios</url-pattern>
+        <servlet-name>ModificarAlumno</servlet-name>
+        <url-pattern>/ModificarAlumno</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>entrenar</servlet-name>
-        <url-pattern>/entrenar</url-pattern>
+        <servlet-name>ActualizaAlumno</servlet-name>
+        <url-pattern>/ActualizaAlumno</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>infoEjercicio</servlet-name>
-        <url-pattern>/infoEjercicio</url-pattern>
+        <servlet-name>ModificaProfesor</servlet-name>
+        <url-pattern>/ModificaProfesor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>actualizaProfesor</servlet-name>
+        <url-pattern>/actualizaProfesor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarAdmin</servlet-name>
+        <url-pattern>/ModificarAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>actualizaAdmin</servlet-name>
+        <url-pattern>/actualizaAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
