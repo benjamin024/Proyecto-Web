@@ -135,7 +135,7 @@ public class infoEjercicio extends HttpServlet {
                 out.println("<a href=ejercicios ><input type=button value='Aceptar' class='btn btn-lg btn-black-outline btn-black'></a>");
             }else{
                 out.println("<h6>Ningún alumno ha respondido el ejercicio</h6>");
-                out.println("<h6><a href=modificarEjercicio?id=" + id + ">Aún puedes hacer cambios en el ejercicio</a></h6>");
+                out.println("<h6><a href=ModificarEjercicio?id=" + id + ">Aún puedes hacer cambios en el ejercicio</a></h6>");
             }
             out.println("</div>");
             out.println("</div>");
